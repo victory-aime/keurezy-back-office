@@ -19,7 +19,19 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "_assets/*": ["./public/assets/*"],
+      "_lottie/*": ["./public/lottie/*"],
+      "_components/*": ["./src/components/*"],
+      "_constants/*": ["./src/app/constants/*"],
+      "_theme/*": ["./src/theme/*"],
+      "_utils/*": ["./src/utils/*"],
+      "_config/*": ["./src/app/config/*"],
+      "_hooks/*": ["./src/app/hooks/*"],
+      "_context/*": ["./src/app/context/*"],
+      "_locales/*": ["./src/app/locales/*"],
+      "_store/*": ["./src/store/*"],
+      "_types/*": ["./src/types/index"]
     }
   },
   "include": [

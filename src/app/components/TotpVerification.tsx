@@ -1,0 +1,96 @@
+"use client";
+
+import { Formik, FormikHelpers, FormikValues } from "formik";
+import { BaseButton, BaseText, FormOtpInput } from "_components/custom";
+import { VStack } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
+import { AuthBoxContainer } from "./AuthBoxContainer";
+import { useAuth } from "_hooks/useAuth";
+import { useTotp } from "_hooks/useTotp";
+import { VALIDATION } from "_types/";
+import { BO_ROUTES } from "@/app/routes";
+
+export const TotpVerification = () => {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const { logout, isLoading: logoutLoading } = useAuth();
+  const { verifyTotp, isLoading } = useTotp();
+
+  const handleValidateTotp = async (
+    values: FormikValues,
+    formikHelpers: FormikHelpers<FormikValues>,
+  ) => {
+    try {
+      const result = await verifyTotp(values.totpCode.join(""));
+      if (!result || "status" in result) {
+        if (result?.status === 401 || result?.status === 400) {
+          formikHelpers?.setFieldError("totpCode", "Code invalide ou expiré");
+        } else if (result?.status === 500) {
+          formikHelpers?.setFieldError("totpCode", t("COMMON.SERVER_ERROR"));
+        } else {
+          formikHelpers?.setFieldError(
+            "totpCode",
+            result?.message ?? "Une erreur est survenue",
+          );
+        }
+        return;
+      }
+      if (result.token) {
+        router.replace(BO_ROUTES.ROOT);
+      }
+    } catch (error) {
+      formikHelpers?.setFieldError("totpCode", t("COMMON.SERVER_ERROR"));
+    }
+  };
+
+  return (
+    <Formik
+      enableReinitialize
+      initialValues={{ totpCode: Array(6).fill(""), trustedDevice: false }}
+      onSubmit={async (values, formikHelpers) =>
+        await handleValidateTotp(
+          values,
+          formikHelpers as FormikHelpers<FormikValues>,
+        )
+      }
+      validationSchema={VALIDATION.TOTP_VALIDATION.totpValidationSchema}
+    >
+      {({ handleSubmit }) => (
+        <AuthBoxContainer
+          title={"Vérification en deux étapes"}
+          description={
+            <BaseText>
+              Pour sécuriser votre compte, saisissez le code à 6 chiffres généré
+              par votre application d’authentification. ?{" "}
+            </BaseText>
+          }
+        >
+          <VStack gap={3} width={"full"}>
+            <FormOtpInput
+              name="totpCode"
+              isDisabled={isLoading}
+              onChangeFunction={handleSubmit}
+            />
+            <BaseText color={"gray.400"}>
+              Entrez le code à 6 chiffres affiché dans votre application
+              d’authentification (Google Authenticator, Microsoft Authenticator,
+              etc.). La vérification s’effectue automatiquement dès que les 6
+              chiffres sont saisis.
+            </BaseText>
+            <BaseButton
+              width={"full"}
+              variant={"outline"}
+              colorType={"danger"}
+              onClick={() => logout()}
+              isLoading={logoutLoading}
+              disabled={isLoading || logoutLoading}
+            >
+              Se déconnecter
+            </BaseButton>
+          </VStack>
+        </AuthBoxContainer>
+      )}
+    </Formik>
+  );
+};

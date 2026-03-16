@@ -1,0 +1,86 @@
+"use client";
+import { Tabs } from "@chakra-ui/react";
+import { TabsProps } from "./interface/tabs";
+import { useState } from "react";
+import { hexToRGB } from "_theme/colors";
+import { BaseContainer } from "../container";
+import { NoDataAnimation } from "../data-table/NoDataAnimation";
+import { useColorMode } from "_components/ui/color-mode";
+
+export const BaseTabs = ({
+  items,
+  redirectLink,
+  isMobile,
+  title = "",
+  description = "",
+  withActionButtons = false,
+  actionsButtonProps,
+  ...rest
+}: TabsProps) => {
+  const { colorMode } = useColorMode();
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  return (
+    <BaseContainer
+      title={title}
+      description={description}
+      border={"none"}
+      textAlign={rest.textAlign}
+      withActionButtons={withActionButtons}
+      actionsButtonProps={actionsButtonProps}
+    >
+      <Tabs.Root
+        defaultValue={items[currentIndex]?.label}
+        variant={"enclosed"}
+        value={items[currentIndex]?.label}
+        onValueChange={({ value }: { value: string }) => {
+          const index = items?.findIndex(
+            (item: { label: string }) => item?.label === value,
+          );
+          setCurrentIndex(index);
+        }}
+        {...rest}
+      >
+        <Tabs.List mt={{ base: 0, sm: 5 }}>
+          {items.map((item, index) => (
+            <Tabs.Trigger
+              color={currentIndex === index ? "primary.500" : "gray.400"}
+              bgColor={
+                currentIndex === index
+                  ? colorMode === "light"
+                    ? "white"
+                    : hexToRGB("primary", 0.1)
+                  : "none"
+              }
+              key={index}
+              value={item.label}
+              p={5}
+              width={"fit-content"}
+            >
+              {item?.icon}
+              {item.label}
+            </Tabs.Trigger>
+          ))}
+          <Tabs.Indicator rounded="l2" bgColor={hexToRGB("primary", 0.1)} />
+        </Tabs.List>
+        {items?.map((item, index) => (
+          <Tabs.Content
+            key={index}
+            value={item.label}
+            mt={{ base: rest.mt ?? 2, sm: rest.mt ?? 4 }}
+            _open={{
+              animationName: "fade-in, scale-in",
+              animationDuration: "300ms",
+            }}
+            _closed={{
+              animationName: "fade-out, scale-out",
+              animationDuration: "120ms",
+            }}
+          >
+            {item?.content ?? <NoDataAnimation />}
+          </Tabs.Content>
+        ))}
+      </Tabs.Root>
+    </BaseContainer>
+  );
+};
