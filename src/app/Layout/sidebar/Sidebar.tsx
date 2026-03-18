@@ -14,6 +14,8 @@ import { SideToolTip } from "./components/SideToolTip";
 import { useSessionRefreshContext } from "_context/SessionRefresh-context";
 import { useMemo } from "react";
 import { useColorMode } from "_components/ui/color-mode";
+import { CONSTANTS } from "@/types";
+import { BO_ROUTES } from "@/app/routes";
 
 export const Sidebar = ({ data, onShowSidebar, sideToggled }: SideBarProps) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -25,15 +27,24 @@ export const Sidebar = ({ data, onShowSidebar, sideToggled }: SideBarProps) => {
     queryOptions: { enabled: false },
   });
 
+  // const { data: allUsers } = UserModule.getAllUserQueries({
+  //   params: {
+  //     initialPage: 1,
+  //     limitPerPage: CONSTANTS.PAGINATION.FIVE_ITEMS_PER_PAGE,
+  //   },
+  // });
+
   const badgesByPath = useMemo(() => {
-    return {};
+    // return {
+    //   [BO_ROUTES.USERS.LIST]: allUsers?.totalItems,
+    // };
   }, []);
 
   const sidebarLinks = useMemo(() => {
     return BO_SIDE_ROUTES.map((group) => ({
       ...group,
       links: group.links.map((link) => {
-        // const badgeValue = badgesByPath[link.path as string];
+        //const badgeValue = badgesByPath[link.path as string];
         return {
           ...link,
           badge: typeof 1 === "number" && 1 > 0 ? 1 : undefined,

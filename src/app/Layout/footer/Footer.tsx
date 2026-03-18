@@ -20,14 +20,15 @@ export const Footer = () => {
       <BaseText variant={TextVariant.XS} color="gray.600">
         © {new Date().getUTCFullYear()} MyImmo. Tous droits réservés.
       </BaseText>
-
-      <Box bg="tertiary.400" h="8px" w="8px" borderRadius="full" />
-      <BaseText fontSize="xs" color="gray.600">
-        Système opérationnel
-      </BaseText>
-      <BaseText variant={TextVariant.XS} color="gray.400">
-        v{version}
-      </BaseText>
+      <Flex alignItems={"center"} gap={1}>
+        <Box bg="secondary.400" h="8px" w="8px" borderRadius="full" />
+        <BaseText fontSize="xs" color="gray.600">
+          Système opérationnel
+        </BaseText>
+        <BaseText variant={TextVariant.XS} color="gray.400">
+          v{version}
+        </BaseText>
+      </Flex>
     </Flex>
   );
 };

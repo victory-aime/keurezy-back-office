@@ -1,7 +1,7 @@
 import { UserRole } from "../enum";
 import { Status } from "../enum/common";
 
-export interface IUser {
+interface IUser {
   id?: string;
   name?: string;
   email?: string;
@@ -10,18 +10,20 @@ export interface IUser {
   twoFactorEnabled?: boolean;
   status?: Status | undefined;
   role?: UserRole | undefined;
-  accounts?: IAccountUsers[];
-  propertyOwner?: { id: string; propertyAgency: { id: string } };
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface IAccountUsers {
+interface IAccountUsers {
   id?: string;
   accountId?: string;
   providerId?: string;
   userId?: string;
 }
 
-export interface IPermission {
+interface IPermission {
   features: string;
   modules: string;
 }
+
+export type { IUser, IAccountUsers, IPermission };

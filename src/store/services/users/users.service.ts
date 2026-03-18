@@ -13,23 +13,11 @@ export class UserService extends BaseApi {
     );
   }
 
-  regenerate_password(data: MODELS.IUser) {
+  getAllUsers(data: { initialPage: number; limitPerPage: number }) {
     return this.apiService.invoke(
-      this.applicationContext.getApiConfig().USER.REGENERATE_PASSWORD,
-      data,
-    );
-  }
-
-  reset_password(data: MODELS.IUser) {
-    return this.apiService.invoke(
-      this.applicationContext.getApiConfig().AUTH.RESET_PASSWORD,
-      data,
-    );
-  }
-  check_email(email: string) {
-    return this.apiService.invoke(
-      this.applicationContext.getApiConfig().USER.CHECK_EMAIL,
-      { email },
+      this.applicationContext.getApiConfig().USER.ALL_USERS,
+      {},
+      { params: data },
     );
   }
 }

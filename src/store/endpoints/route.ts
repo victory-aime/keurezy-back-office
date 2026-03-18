@@ -5,7 +5,7 @@ import {
 } from "rise-core-frontend";
 
 const APIS_ROUTES_MODULES_PATH = {
-  USER: "/user",
+  USER: "/users",
   AGENCY: "/agency",
 };
 
@@ -22,10 +22,10 @@ export const APIS = (baseUrl?: string) => {
         showResponse: false,
         handleErrorManually: false,
       }),
-      CHECK_EMAIL: api({
-        path: `${APIS_ROUTES_MODULES_PATH.USER}/verified-email`,
-        method: "POST",
-        pathBase: "UNSECURED_API",
+      ALL_USERS: api({
+        path: `${APIS_ROUTES_MODULES_PATH.USER}/get-allUsers`,
+        method: "GET",
+        pathBase: "SECURED_API",
         showResponse: false,
       }),
     },

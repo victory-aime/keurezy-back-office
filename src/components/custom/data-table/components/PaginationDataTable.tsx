@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { BaseText, Icons, TextVariant } from "_components/custom";
 import { useTranslation } from "react-i18next";
+import { VariablesColors } from "@/theme/variables";
 
 export const PaginationDataTable: FC<PaginationProps> = ({
   totalPages,
@@ -75,8 +76,6 @@ export const PaginationDataTable: FC<PaginationProps> = ({
           pageSize={totalDataPerPage}
           page={currentPage}
           onPageChange={(details) => handleClick(details.page)}
-          // boundaryCount={0}
-          // siblingCount={0}
         >
           <ButtonGroup variant="ghost" size="sm">
             <Pagination.PrevTrigger asChild onClick={getPreviousPage}>
@@ -90,7 +89,7 @@ export const PaginationDataTable: FC<PaginationProps> = ({
                 <IconButton
                   key={page.value}
                   variant={{ base: "ghost", _selected: "solid" }}
-                  colorPalette={{ _selected: "purple" }}
+                  bgColor={{ _selected: VariablesColors.primary }}
                   onClick={() => handleClick(page?.value)}
                 >
                   {page?.value}

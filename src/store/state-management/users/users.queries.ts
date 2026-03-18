@@ -13,40 +13,23 @@ const getUserInfo = (args: QUERIES.QueryPayload<{ userId: MODELS.IUser }>) => {
   });
 };
 
-const resetPasswordMutation = (args: QUERIES.MutationPayload<MODELS.IUser>) => {
-  return QUERIES.useCustomMutation({
-    mutationKey: [Constants.USERS_KEYS.RESET_PASSWORD],
-    mutationFn: ({ payload }) =>
-      usersServiceInstance().reset_password(payload!),
-    options: args.mutationOptions,
-  });
-};
-
-const regeneratePasswordMutation = (
-  args: QUERIES.MutationPayload<MODELS.IUser>,
+const getAllUserQueries = (
+  args: QUERIES.QueryPayload<{
+    initialPage: number;
+    limitPerPage: number;
+  }>,
 ) => {
-  return QUERIES.useCustomMutation({
-    mutationKey: [Constants.USERS_KEYS.REGENERATE_PASSWORD],
-    mutationFn: ({ payload }) =>
-      usersServiceInstance().regenerate_password(payload!),
-    options: args.mutationOptions,
+  const { queryOptions, params } = args;
+
+  return QUERIES.useCustomQuery<MODELS.IPaginatedResponse<MODELS.IUser>>({
+    queryKey: [Constants.USERS_KEYS.GET_ALL_USERS, params],
+    queryFn: () =>
+      usersServiceInstance().getAllUsers({
+        initialPage: params?.initialPage,
+        limitPerPage: params?.limitPerPage,
+      }),
+    options: queryOptions,
   });
 };
 
-const checkEmailMutation = (
-  args: QUERIES.MutationPayload<{ email: string }>,
-) => {
-  return QUERIES.useCustomMutation({
-    mutationKey: [Constants.USERS_KEYS.CHECK_EMAIL],
-    mutationFn: ({ payload }) =>
-      usersServiceInstance().check_email(payload?.email!),
-    options: args.mutationOptions,
-  });
-};
-
-export {
-  getUserInfo,
-  resetPasswordMutation,
-  regeneratePasswordMutation,
-  checkEmailMutation,
-};
+export { getUserInfo, getAllUserQueries };

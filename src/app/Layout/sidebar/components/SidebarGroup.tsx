@@ -90,7 +90,7 @@ export const SidebarGroup = ({
                           <Badge
                             borderRadius="full"
                             fontSize="0.8em"
-                            colorPalette="blue"
+                            colorPalette="red"
                           >
                             {item?.badge}
                           </Badge>

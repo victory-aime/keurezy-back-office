@@ -11,11 +11,11 @@ export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
         icon: Icons.Home,
       },
 
-      // {
-      //   label: "Paiements",
-      //   path: "/dashboard/payments",
-      //   icon: Icons.CreditCard,
-      // },
+      {
+        label: "Mes utilisateurs",
+        path: BO_ROUTES.USERS.LIST,
+        icon: Icons.User,
+      },
       // {
       //   label: "Voir la page d'accueil",
       //   path: APP_ROUTES.ROOT,
