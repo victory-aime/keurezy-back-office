@@ -48,12 +48,8 @@ export const BaseAccordion: FC<AccordionProps> = ({
             return (
               <AccordionItem key={index} value={item.label} mt="3">
                 <AccordionItemTrigger
-                  bgColor={
-                    isOpen ? hexToRGB("success", 0.3) : hexToRGB("lighter", 0.5)
-                  }
-                  borderColor={
-                    isOpen ? hexToRGB("success", 0.3) : hexToRGB("lighter", 0.5)
-                  }
+                  bgColor={isOpen ? hexToRGB("primary", 0.3) : "none"}
+                  borderColor={isOpen ? hexToRGB("primary", 0.3) : "none"}
                   borderWidth={1.5}
                   p="3"
                   borderRadius="7px"

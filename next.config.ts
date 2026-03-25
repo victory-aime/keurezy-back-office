@@ -1,6 +1,20 @@
 import type { NextConfig } from "next";
+import CopyPlugin from "copy-webpack-plugin";
 
 const nextConfig: NextConfig = {
+  webpack: (config) => {
+    config.plugins.push(
+      new CopyPlugin({
+        patterns: [
+          {
+            from: "node_modules/pdfjs-dist/build/pdf.worker.min.mjs",
+            to: "../public/pdf.worker.min.mjs",
+          },
+        ],
+      }),
+    );
+    return config;
+  },
   turbopack: {},
   /* use redirect proxy for api calls
    * every request to /api/* will be redirected to the backend server

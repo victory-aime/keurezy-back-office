@@ -20,4 +20,11 @@ export class UserService extends BaseApi {
       { params: data },
     );
   }
+  getUser(params: { userId: string }) {
+    return this.apiService.invoke(
+      this.applicationContext.getApiConfig().USER.ONE_USER,
+      {},
+      { params },
+    );
+  }
 }

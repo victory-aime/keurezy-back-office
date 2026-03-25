@@ -32,4 +32,17 @@ const getAllUserQueries = (
   });
 };
 
-export { getUserInfo, getAllUserQueries };
+const getUserQueries = (
+  args: QUERIES.QueryPayload<{
+    userId: string;
+  }>,
+) => {
+  const { queryOptions, params } = args;
+  return QUERIES.useCustomQuery<MODELS.IUserInfoResponse>({
+    queryKey: [Constants.USERS_KEYS.GET_USER, params],
+    queryFn: () => usersServiceInstance().getUser({ userId: params?.userId }),
+    options: queryOptions,
+  });
+};
+
+export { getUserInfo, getAllUserQueries, getUserQueries };

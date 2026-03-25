@@ -22,13 +22,7 @@ export const FormContainer = ({
 }) => {
   const router = useRouter();
   return (
-    <Box
-      width="full"
-      maxW={{ base: "2xl", sm: "4xl" }}
-      p={{ base: 3, sm: 4 }}
-      mx={"auto"}
-      spaceY={"6"}
-    >
+    <Box width="full" p={{ base: 3, sm: 4 }} mx={"auto"} spaceY={"6"}>
       {isLoading ? (
         <>
           {Array.from({ length: 5 }).map((_, idx) => (

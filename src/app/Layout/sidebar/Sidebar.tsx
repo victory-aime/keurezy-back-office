@@ -27,27 +27,30 @@ export const Sidebar = ({ data, onShowSidebar, sideToggled }: SideBarProps) => {
     queryOptions: { enabled: false },
   });
 
-  // const { data: allUsers } = UserModule.getAllUserQueries({
-  //   params: {
-  //     initialPage: 1,
-  //     limitPerPage: CONSTANTS.PAGINATION.FIVE_ITEMS_PER_PAGE,
-  //   },
-  // });
+  const { data: allUsers } = UserModule.getAllUserQueries({
+    params: {
+      initialPage: 1,
+      limitPerPage: CONSTANTS.PAGINATION.FIVE_ITEMS_PER_PAGE,
+    },
+  });
 
   const badgesByPath = useMemo(() => {
-    // return {
-    //   [BO_ROUTES.USERS.LIST]: allUsers?.totalItems,
-    // };
-  }, []);
+    return {
+      [BO_ROUTES.USERS.LIST]: allUsers?.totalItems,
+    };
+  }, [allUsers?.totalItems]);
 
   const sidebarLinks = useMemo(() => {
     return BO_SIDE_ROUTES.map((group) => ({
       ...group,
       links: group.links.map((link) => {
-        //const badgeValue = badgesByPath[link.path as string];
+        const badgeValue = badgesByPath[link.path as string];
         return {
           ...link,
-          badge: typeof 1 === "number" && 1 > 0 ? 1 : undefined,
+          badge:
+            typeof badgeValue === "number" && badgeValue > 0
+              ? badgeValue
+              : undefined,
         };
       }),
     }));

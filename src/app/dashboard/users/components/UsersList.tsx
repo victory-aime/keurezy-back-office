@@ -3,15 +3,19 @@ import { BO_ROUTES } from "@/app/routes";
 import {
   BaseContainer,
   BaseTag,
+  BaseText,
   ColumnsDataTable,
   DataTableContainer,
+  Icons,
 } from "@/components/custom";
 import { Avatar } from "@/components/ui/avatar";
 import { UserModule } from "@/store/state-management";
+import { VariablesColors } from "@/theme/variables";
 import { CONSTANTS } from "@/types";
-import { Flex, VStack } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { formatCreatedAt } from "rise-core-frontend";
 
 export const UsersList = () => {
   const router = useRouter();
@@ -24,7 +28,7 @@ export const UsersList = () => {
   } = UserModule.getAllUserQueries({
     params: {
       initialPage: currentPage,
-      limitPerPage: CONSTANTS.PAGINATION.FIVE_ITEMS_PER_PAGE,
+      limitPerPage: CONSTANTS.PAGINATION.TEN_ITEMS_PER_PAGE,
     },
   });
 
@@ -38,16 +42,14 @@ export const UsersList = () => {
       accessor: "fullObject",
       cell: (value: { name: string; image: string; email: string }) => {
         return (
-          <Flex alignItems={"center"} gap={2} textTransform={"capitalize"}>
-            <Avatar
-              name={value.name}
-              src={value.image}
-              bgColor={"primary.100"}
-            />
-            <VStack gap={0}>
-              {value?.name}
-              {value?.email}
-            </VStack>
+          <Flex alignItems={"center"} gap={2} width={"fit-content"}>
+            <Avatar name={value.name} src={value.image} />
+            <Stack gap={0}>
+              <BaseText>{value?.name}</BaseText>
+              <BaseText fontSize={"xs"} color={"gray.400"}>
+                {value?.email}
+              </BaseText>
+            </Stack>
           </Flex>
         );
       },
@@ -55,6 +57,12 @@ export const UsersList = () => {
     {
       header: "Role",
       accessor: "role",
+      cell: (role: "IMMO_OWNER" | "CLIENT") => (
+        <BaseTag
+          color={role === "IMMO_OWNER" ? "blue" : "orange"}
+          label={role === "IMMO_OWNER" ? "Agence" : "Utilisateur"}
+        />
+      ),
     },
     {
       header: "Status",
@@ -62,18 +70,29 @@ export const UsersList = () => {
       cell: (status) => <BaseTag status={status} />,
     },
     {
-      header: "Email verifiée",
+      header: "Email",
       accessor: "emailVerified",
-      cell: (x) => (
-        <BaseTag color={x ? "green" : "red"} label={x ? "x" : "v"} />
-      ),
+      cell: (value) =>
+        value ? (
+          <Icons.CircleCheck color={VariablesColors.success} size={18} />
+        ) : (
+          <Icons.CircleClose color={VariablesColors.danger} size={18} />
+        ),
     },
     {
       header: "2FA",
       accessor: "twoFactorEnabled",
-      cell: (x) => (
-        <BaseTag color={x ? "green" : "red"} label={x ? "x" : "v"} />
-      ),
+      cell: (value: boolean) =>
+        value ? (
+          <Icons.CircleCheck color={VariablesColors.success} size={18} />
+        ) : (
+          <Icons.CircleClose color={VariablesColors.danger} size={18} />
+        ),
+    },
+    {
+      header: "Créé le",
+      accessor: "createdAt",
+      cell: (value: string) => formatCreatedAt(value),
     },
 
     {
@@ -106,9 +125,13 @@ export const UsersList = () => {
     >
       <DataTableContainer
         data={allUsers?.content ?? []}
+        isOpenSelect
         columns={usersColumns}
         isLoading={isLoading}
         initialPage={currentPage}
+        onOpenSelectRow={(row) =>
+          router.push(`${BO_ROUTES.USERS.DETAILS}?userId=${row?.id}`)
+        }
         paginationData={{
           lazy: true,
           currentPage,

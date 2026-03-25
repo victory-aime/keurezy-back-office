@@ -28,6 +28,12 @@ export const APIS = (baseUrl?: string) => {
         pathBase: "SECURED_API",
         showResponse: false,
       }),
+      ONE_USER: api({
+        path: `${APIS_ROUTES_MODULES_PATH.USER}/get-user`,
+        method: "GET",
+        pathBase: "SECURED_API",
+        showResponse: false,
+      }),
     },
     AGENCY: {
       CREATE_AGENCY: api({

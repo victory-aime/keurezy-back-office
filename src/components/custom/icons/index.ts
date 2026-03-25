@@ -14,6 +14,8 @@ import {
   CiUser,
   CiViewList,
   CiWarning,
+  CiCircleCheck,
+  CiDesktop,
 } from "react-icons/ci";
 import { FaCog, FaUserAlt, FaUserPlus, FaUsers } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
@@ -71,10 +73,11 @@ import {
 import { BsCalendar3, BsSliders } from "react-icons/bs";
 import { CiGrid31 } from "react-icons/ci";
 import { ImOffice } from "react-icons/im";
-import { GoZap } from "react-icons/go";
+import { GoLink, GoZap } from "react-icons/go";
 import { BiWorld } from "react-icons/bi";
-import { FiTarget } from "react-icons/fi";
+import { FiMinus, FiTarget } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export const Icons = {
   MapPin: CiMapPin,
@@ -88,7 +91,7 @@ export const Icons = {
   IoIosHelpCircle,
   Home: HiHome,
   TbTax: TbTaxEuro,
-  Minus: HiMiniPlusSmall,
+  PlusMinus: HiMiniPlusSmall,
   Filter: CiFilter,
   Save: CiSaveDown2,
   Refresh: CgSync,
@@ -150,4 +153,9 @@ export const Icons = {
   Cloud: CiCloudOn,
   Google: FcGoogle,
   GridHome: CiGrid42,
+  CircleCheck: CiCircleCheck,
+  CircleClose: IoIosCloseCircleOutline,
+  Link: GoLink,
+  Desktop: CiDesktop,
+  Minus: FiMinus,
 };
