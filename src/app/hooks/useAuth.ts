@@ -21,11 +21,11 @@ export const useAuth = () => {
       showLoader();
       const { data } = await authClient.signOut();
       if (data?.success) {
-        router.push(BO_ROUTES.ROOT);
+        router.refresh();
+        queryClient.clear();
       }
     } finally {
       hideLoader();
-      queryClient.clear();
     }
   };
 
@@ -40,10 +40,8 @@ export const useAuth = () => {
           async onSuccess(context) {
             if (context.data.twoFactorRedirect) {
               router.replace(BO_ROUTES._2FA);
-            } else if (callbackUrl) {
-              router.push(callbackUrl);
             } else {
-              return;
+              router.refresh();
             }
           },
         },

@@ -1,14 +1,17 @@
 export enum ROUTES {
-  DASHBOARD = "/dashboard",
   USERS = "/users",
+  PACKS = "/packs",
 }
 
 export const BO_ROUTES = {
   ROOT: "/",
-  DASHBOARD: ROUTES.DASHBOARD,
   USERS: {
-    LIST: `${ROUTES.DASHBOARD}/users`,
-    DETAILS: `${ROUTES.DASHBOARD}/users/details`,
+    LIST: `${ROUTES.USERS}`,
+    DETAILS: `${ROUTES.USERS}/details`,
+  },
+  PACKS: {
+    LIST: `${ROUTES.PACKS}`,
+    DETAILS: `${ROUTES.PACKS}/details`,
   },
   _2FA: "/totp",
 };

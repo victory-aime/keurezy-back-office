@@ -38,19 +38,19 @@ interface IUserSessions {
 interface IUserInfoResponse extends IUser {
   accounts: IAccountUsers[];
   sessions: IUserSessions[];
-  propertyOwner: {
+  owner: {
     id: string;
     userId: string;
     createdAt: string;
     updatedAt: string;
-    propertyAgency: {
+    agency: {
       id: string;
       name: string;
       description: string;
       address: string;
       phone: string;
       agencyLogo: string;
-      isApprove: boolean;
+      isVerified: boolean;
       status: Status;
       documents: string[];
       acceptTerms: true;
@@ -73,7 +73,7 @@ interface Test {
   emailVerified: false;
   twoFactorEnabled: false;
   status: "ACTIVE";
-  role: "IMMO_OWNER";
+  role: "OWNER";
   createdAt: "2026-03-03T18:22:01.214Z";
   updatedAt: "2026-03-03T18:22:05.053Z";
   accounts: [

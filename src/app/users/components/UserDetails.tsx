@@ -34,7 +34,7 @@ export const UserDetails = ({ userId }: { userId: string }) => {
   };
 
   if (!userId) {
-    return (window.location.href = BO_ROUTES.DASHBOARD);
+    return (window.location.href = BO_ROUTES.ROOT);
   }
 
   const userDetailsAccordions = [

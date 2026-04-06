@@ -5,7 +5,7 @@ import { Colors } from "_theme/colors";
 interface AccordionProps extends AccordionRootProps {
   items: {
     label: string;
-    icon: ReactNode;
+    icon?: ReactNode;
     content: ReactNode | string | any;
   }[];
   isLoading?: boolean;

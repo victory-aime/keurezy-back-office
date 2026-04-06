@@ -4,7 +4,7 @@ import { BaseContainer, BaseText } from "_components/custom";
 import { Span } from "@chakra-ui/react";
 import { authClient } from "../lib/auth-client";
 
-export default function Home() {
+export const Dashboard = () => {
   const { data: session } = authClient.useSession();
 
   return (
@@ -27,4 +27,4 @@ export default function Home() {
       <BaseText>Welcome to dashboard</BaseText>
     </BaseContainer>
   );
-}
+};

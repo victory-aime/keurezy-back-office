@@ -204,7 +204,7 @@
     "SECURITY": {
       "PASSWORD": "Password",
       "PASSWORD_DESC": "Set a secure password to protect your account.",
-      "PASSWORD_INFO": "Your password must contain at least 8 characters, with at least one uppercase letter, one lowercase letter, one number and one special character (e.g. ! @ # $ %). Avoid using personal information or passwords that are too simple.",
+      "PASSWORD_INFO": "Your password must contain at least 12 characters, with at least one uppercase letter, one lowercase letter, one number and one special character (e.g. ! @ # $ %). Avoid using personal information or passwords that are too simple.",
       "PASS_KEY": "Access keys (Passkeys)",
       "PASS_KEY_DESC": "Add one or more access keys to log in without a password. Use facial recognition, a fingerprint or a compatible secure device.",
       "ADD_PASS_KEY": "Add a key",

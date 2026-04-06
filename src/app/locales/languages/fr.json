@@ -220,7 +220,7 @@
     "SECURITY": {
       "PASSWORD": "Mot de passe",
       "PASSWORD_DESC": "Définissez un mot de passe sécurisé pour protéger votre compte.",
-      "PASSWORD_INFO": "Votre mot de passe doit contenir au minimum 8 caractères, avec au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial (ex. ! @ # $ %). Évitez d'utiliser des informations personnelles ou des mots de passe trop simples.",
+      "PASSWORD_INFO": "Votre mot de passe doit contenir au minimum 12 caractères, avec au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial (ex. ! @ # $ %). Évitez d'utiliser des informations personnelles ou des mots de passe trop simples.",
       "PASS_KEY": "Clés d'accès (Passkeys)",
       "PASS_KEY_DESC": "Ajoutez une ou plusieurs clés d'accès pour vous connecter sans mot de passe. Utilisez la reconnaissance faciale, une empreinte ou un appareil sécurisé compatible.",
       "ADD_PASS_KEY": "Ajouter une clé",
@@ -237,73 +237,25 @@
   },
   "PERMISSIONS": {
     "MODULES": {
-      "ADMINISTRATION": "Gestion de l'administration",
-      "KPI": "Vue 360°",
-      "USERS": "Gestion des utilisateurs",
-      "STUDENT": "Gestion des élèves",
-      "CLASS": "Gestion des classes",
-      "PAYMENTS": "Gestion des paiements",
-      "SCHOOL_CONFIG": "Gestion des configurations",
-      "FEE": "Gestion des configurations de frais",
-      "FINANCES": "Vue globale sur les activités financières"
+      "PROPERTIES": "Propriétés",
+      "LEADS": "Leads",
+      "REPORTS": "Rapports",
+      "ACCOUNTING": "Comptabilité",
+      "USERS": "Utilisateurs"
     },
     "FEATURE_LIST": {
-      "VIEW_PAYMENT_PARTIAL": "Voir les paiements partiels",
-      "VIEW_PAYMENT_STATUS_SUMMARY": "Voir le résumé des statuts de paiement",
-      "VIEW_GENDER": "Voir la répartition par genre",
-      "VIEW_MONTHLY": "Voir les statistiques mensuelles",
-      "VIEW_FINANCE_OVERVIEW": "Voir les statistiques par catégorie",
-
-      "VIEW_USERS_LIST": "Voir la liste des utilisateurs",
-      "REGENERATE_PASSWORD": "Régénérer le mot de passe",
-      "CREATE_USER": "Créer un utilisateur",
-      "UPDATE_USER": "Modifier un utilisateur",
-      "DELETE_USER": "Supprimer un utilisateur",
-
-      "CREATE_CLASS": "Créer une classe",
-      "UPDATE_CLASS": "Modifier une classe",
-      "VIEW_CLASS": "Voir les classes",
-      "DELETE_CLASS": "Supprimer une classe",
-
-      "CREATE_STUDENT": "Créer un élève",
-      "UPDATE_STUDENT": "Modifier un élève",
-      "ALL_STUDENT": "Voir les élèves",
-      "GET_STUDENT_ID": "Voir un élève",
-
-      "VIEW_PAYMENT": "Voir les paiements",
-      "ADD_PAYMENT": "Ajouter un paiement",
-      "DOWNLOAD_PAYMENT": "Télécharger un reçu de paiement",
-      "EDIT_PAYMENT": "Modifier un paiement",
-      "DELETE_PAYMENT": "Supprimer un paiement",
-
-      "CREATE_SCHOOL_CONFIG": "Créer une configuration",
-      "ALL_SCHOOL_CONFIG": "Voir la liste des configuration",
-      "UPDATE_SCHOOL_CONFIG": "Modifier une configuration",
-      "CHANGE_SCHOOL_CONFIG_STATUS": "Changer le statut de configuration",
-
-      "ADD_CLASS_FEE_CONFIG": "Ajouter une classe a une configuration de frais",
-      "ALL_FEE_CONFIG": "Voir la liste de configuration des frais",
-      "CREATE_FEE_CONFIG": "Créer une configuration de frais",
-      "UPDATE_FEE_CONFIG": "Modifier une configuration de frais",
-      "DELETE_FEE_CONFIG": "Supprimer une configuration de frais",
-
-      "ADD_NEW_EXPENSE": "Ajouter une nouvelle dépense",
-      "EDIT_EXPENSE": "Modifier les dépenses",
-      "DELETE_EXPENSE": "Supprimer les dépenses",
-      "VIEW_FINANCE_LIST": "Voir la liste des dépenses"
+      "MANAGE_PROPERTIES": "Gérer les propriétés",
+      "MANAGE_LEADS": "Gérer les leads",
+      "MANAGE_REPORTS": "Gérer les rapports",
+      "MANAGE_ACCOUNTING": "Gérer la comptabilité",
+      "MANAGE_USERS": "Inviter des collaborateurs"
     }
   },
   "SUBSCRIPTION": {
     "PLANS": {
       "BASIC": "Débutant",
       "PRO": "Professionnel",
-      "PREMIUM": "Entreprise",
-
-      "MAX_BOOKINGS_PER_MONTH": "Réservations / mois",
-      "MAX_STYLISTS": "Coiffeuses",
-      "MAX_CLIENTS": "Clients",
-      "MAX_SMS_PER_MONTH": "SMS / mois",
-      "MAX_SALONS": "Gestion multi-salon"
+      "PREMIUM": "Entreprise"
     }
   }
 }

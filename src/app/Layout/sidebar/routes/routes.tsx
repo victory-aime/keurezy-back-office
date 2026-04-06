@@ -6,7 +6,7 @@ export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
   {
     links: [
       {
-        path: BO_ROUTES.DASHBOARD,
+        path: BO_ROUTES.ROOT,
         label: "SIDE_BAR.DASHBOARD",
         icon: Icons.Home,
       },
@@ -16,11 +16,11 @@ export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
         path: BO_ROUTES.USERS.LIST,
         icon: Icons.User,
       },
-      // {
-      //   label: "Voir la page d'accueil",
-      //   path: APP_ROUTES.ROOT,
-      //   icon: Icons.IoIosArrowRoundBack,
-      // },
+      {
+        label: "Mes packs",
+        path: BO_ROUTES.PACKS.LIST,
+        icon: Icons.Paper,
+      },
     ],
     title: "Principal",
     icon: Icons.GridHome,

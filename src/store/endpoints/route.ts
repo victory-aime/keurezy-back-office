@@ -6,6 +6,7 @@ import {
 
 const APIS_ROUTES_MODULES_PATH = {
   USER: "/users",
+  PACKS: "/packs",
   AGENCY: "/agency",
 };
 
@@ -31,6 +32,26 @@ export const APIS = (baseUrl?: string) => {
       ONE_USER: api({
         path: `${APIS_ROUTES_MODULES_PATH.USER}/get-user`,
         method: "GET",
+        pathBase: "SECURED_API",
+        showResponse: false,
+      }),
+    },
+    PACKS: {
+      GET_ALL_PACKS: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PACKS}/get-all-packs`,
+        method: "GET",
+        pathBase: "SECURED_API",
+        showResponse: false,
+      }),
+      ADD_PACK: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PACKS}/add-pack`,
+        method: "POST",
+        pathBase: "SECURED_API",
+        showResponse: false,
+      }),
+      UPDATE_PACK: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PACKS}/update-pack`,
+        method: "PUT",
         pathBase: "SECURED_API",
         showResponse: false,
       }),

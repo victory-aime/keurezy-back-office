@@ -14,14 +14,14 @@ export const AgenceSection = ({
 }) => {
   return (
     <VStack gap={4} width="full" align="stretch">
-      {data?.propertyOwner?.propertyAgency ? (
+      {data?.owner?.agency ? (
         <>
           <Stack>
             <BaseText fontWeight="bold" fontSize="lg">
-              {data.propertyOwner.propertyAgency.name}
+              {data.owner.agency.name}
             </BaseText>
             <BaseText color="gray.500" fontSize="sm">
-              {data.propertyOwner.propertyAgency.description}
+              {data.owner.agency.description}
             </BaseText>
           </Stack>
 
@@ -29,21 +29,21 @@ export const AgenceSection = ({
           <VStack align="stretch" gap={0}>
             <Flex py={2} justify="space-between">
               <BaseText color="gray.500">Adresse</BaseText>
-              <BaseText>{data.propertyOwner.propertyAgency.address}</BaseText>
+              <BaseText>{data.owner.agency.address}</BaseText>
             </Flex>
 
             <Separator />
 
             <Flex py={2} justify="space-between">
               <BaseText color="gray.500">Téléphone</BaseText>
-              <BaseText>{data.propertyOwner.propertyAgency.phone}</BaseText>
+              <BaseText>{data.owner.agency.phone}</BaseText>
             </Flex>
 
             <Separator />
 
             <Flex py={2} justify="space-between">
               <BaseText color="gray.500">Status</BaseText>
-              <BaseTag status={data.propertyOwner.propertyAgency.status} />
+              <BaseTag status={data.owner.agency.status} />
             </Flex>
 
             <Separator />
@@ -51,16 +51,8 @@ export const AgenceSection = ({
             <Flex py={2} justify="space-between">
               <BaseText color="gray.500">Approve</BaseText>
               <BaseTag
-                color={
-                  data.propertyOwner.propertyAgency.isApprove
-                    ? "green"
-                    : "orange"
-                }
-                label={
-                  data.propertyOwner.propertyAgency.isApprove
-                    ? "Approved"
-                    : "Pending"
-                }
+                color={data.owner.agency.isVerified ? "green" : "orange"}
+                label={data.owner.agency.isVerified ? "Approved" : "Pending"}
               />
             </Flex>
 
@@ -69,12 +61,10 @@ export const AgenceSection = ({
             <Flex py={2} justify="space-between">
               <BaseText color="gray.500">Rating</BaseText>
               <HStack>
-                {data?.propertyOwner.propertyAgency.rating && (
+                {data?.owner.agency.rating && (
                   <Icons.Star color={VariablesColors.orange} size={18} />
                 )}
-                <BaseText>
-                  {data.propertyOwner.propertyAgency?.rating ?? "N/A"}
-                </BaseText>
+                <BaseText>{data.owner.agency?.rating ?? "N/A"}</BaseText>
               </HStack>
             </Flex>
 
@@ -83,7 +73,7 @@ export const AgenceSection = ({
             <Flex py={2} justify="space-between">
               <BaseText color="gray.500">Terms</BaseText>
               <HStack>
-                {data?.propertyOwner.propertyAgency.acceptTerms ? (
+                {data?.owner.agency.acceptTerms ? (
                   <Icons.CircleCheck
                     color={VariablesColors.success}
                     size={18}
@@ -92,7 +82,7 @@ export const AgenceSection = ({
                   <Icons.CircleClose color={VariablesColors.danger} size={18} />
                 )}
                 <BaseText>
-                  {data.propertyOwner.propertyAgency.acceptTerms ? "Yes" : "No"}
+                  {data.owner.agency.acceptTerms ? "Yes" : "No"}
                 </BaseText>
               </HStack>
             </Flex>
@@ -101,8 +91,8 @@ export const AgenceSection = ({
           <VStack align="stretch" gap={2}>
             <BaseText>Documents</BaseText>
 
-            {data.propertyOwner.propertyAgency.documents?.length ? (
-              data.propertyOwner.propertyAgency.documents.map((doc, idx) => (
+            {data.owner.agency.documents?.length ? (
+              data.owner.agency.documents.map((doc, idx) => (
                 <Flex
                   key={idx}
                   p={2}

@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
-import { authClient } from "../lib/auth-client";
 import { AuthContextType } from "../Layout/sidebar/types";
+import { SessionResponse } from "better-auth/client";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -13,23 +13,22 @@ export function isExpired(expiresAt: string | Date): boolean {
   return new Date() >= expirationDate;
 }
 
-export function AuthContextProvider({ children }: { children: ReactNode }) {
-  const {
-    data: session,
-    isPending: isLoading,
-    refetch,
-  } = authClient.useSession();
-
-  if (session?.session?.expiresAt && isExpired(session.session.expiresAt)) {
+export function AuthContextProvider({
+  children,
+  session,
+}: {
+  children: ReactNode;
+  session: SessionResponse | null;
+}) {
+  if (session?.expiresAt && isExpired(session.expiresAt)) {
   }
 
   return (
     <AuthContext.Provider
       value={{
-        session: session?.session,
-        isLoading,
+        session: session?.session!,
+        isLoading: !session?.session,
         user: session?.user,
-        refetchSession: refetch,
       }}
     >
       {children}

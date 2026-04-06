@@ -57,10 +57,10 @@ export const UsersList = () => {
     {
       header: "Role",
       accessor: "role",
-      cell: (role: "IMMO_OWNER" | "CLIENT") => (
+      cell: (role: "OWNER" | "CLIENT") => (
         <BaseTag
-          color={role === "IMMO_OWNER" ? "blue" : "orange"}
-          label={role === "IMMO_OWNER" ? "Agence" : "Utilisateur"}
+          color={role === "OWNER" ? "blue" : "orange"}
+          label={role === "OWNER" ? "Agence" : "Utilisateur"}
         />
       ),
     },
