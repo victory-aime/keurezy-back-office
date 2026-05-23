@@ -1,7 +1,7 @@
-import * as Constants from "./constants";
-import { packsServiceInstance } from "./users.service-instance";
-import { MODELS } from "_types/index";
-import { QUERIES } from "rise-core-frontend";
+import * as Constants from './constants';
+import { packsServiceInstance } from './users.service-instance';
+import { MODELS } from '_types/index';
+import { QUERIES } from 'rise-core-frontend';
 
 const getAllPacksQueries = (args: QUERIES.QueryPayload) => {
   const { queryOptions } = args;

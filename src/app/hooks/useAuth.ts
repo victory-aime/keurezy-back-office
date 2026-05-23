@@ -1,10 +1,12 @@
-import { useRouter } from "next/navigation";
-import { useGlobalLoader } from "_context/loaderContext";
-import { handleApiError } from "_utils/handleApiError";
-import { handleApiSuccess } from "_utils/handleApiSuccess";
-import { authClient } from "../lib/auth-client";
-import { queryClient } from "../lib/query-client";
-import { BO_ROUTES } from "../routes";
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { useGlobalLoader } from '_context/loaderContext';
+import { handleApiError } from '_utils/handleApiError';
+import { handleApiSuccess } from '_utils/handleApiSuccess';
+import { authClient } from '../lib/auth-client';
+import { queryClient } from '../lib/query-client';
+import { APP_ROUTES } from '../routes';
 
 interface AuthTypes {
   email?: string;
@@ -19,17 +21,20 @@ export const useAuth = () => {
   const logout = async () => {
     try {
       showLoader();
-      const { data } = await authClient.signOut();
-      if (data?.success) {
-        router.refresh();
-        queryClient.clear();
-      }
+      await authClient.signOut();
+      window.location.href = APP_ROUTES.SIGN_IN;
+      queryClient.clear();
+    } catch (error) {
+      handleApiError({
+        status: 500,
+        message: 'Une erreur est survenue lors de la déconnexion.',
+      });
     } finally {
       hideLoader();
     }
   };
 
-  const login = async ({ email, password, callbackUrl }: AuthTypes) => {
+  const login = async ({ email, password }: AuthTypes) => {
     try {
       const result = await authClient.signIn.email(
         {
@@ -39,9 +44,7 @@ export const useAuth = () => {
         {
           async onSuccess(context) {
             if (context.data.twoFactorRedirect) {
-              router.replace(BO_ROUTES._2FA);
-            } else {
-              router.refresh();
+              router.replace(APP_ROUTES._2FA);
             }
           },
         },
@@ -53,12 +56,15 @@ export const useAuth = () => {
         });
         return;
       }
-      if (result?.data.url) {
-        handleApiSuccess({ status: 200, message: "Connexion réussie" });
-        router.replace(result.data.url);
+      if (result?.data?.token) {
+        handleApiSuccess({ status: 200, message: 'Connexion réussie' });
+        window.location.href = APP_ROUTES.ROOT;
       }
     } catch (error) {
-      console.log("error catch", error);
+      handleApiError({
+        status: 500,
+        message: 'Une erreur interne est survenue. Veuillez réessayer plus tard.',
+      });
     }
   };
 

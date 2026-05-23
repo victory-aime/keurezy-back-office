@@ -1,4 +1,4 @@
-import { FeatureCategory, SubscriptionPlan, COMMON } from "../enum";
+import { FeatureCategory, SubscriptionPlan, COMMON } from '../enum';
 
 interface IFeature {
   id: string;

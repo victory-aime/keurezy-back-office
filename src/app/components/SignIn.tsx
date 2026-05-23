@@ -1,21 +1,17 @@
-"use client";
+'use client';
 
-import { BaseButton, FormTextInput, Icons } from "_components/custom";
-import { useRouter } from "next/navigation";
-import { VStack } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
-import { useAuth } from "_hooks/useAuth";
-import { Formik, FormikValues } from "formik";
-import { VALIDATION } from "_types/index";
-import { useState } from "react";
-import { AuthBoxContainer } from "./AuthBoxContainer";
-import { BO_ROUTES } from "@/app/routes";
+import { BaseButton, FormTextInput, Icons } from '_components/custom';
+import { useRouter } from 'next/navigation';
+import { VStack } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '_hooks/useAuth';
+import { Formik, FormikValues } from 'formik';
+import { VALIDATION } from '_types/index';
+import { useState } from 'react';
+import { AuthBoxContainer } from './AuthBoxContainer';
+import { BO_ROUTES } from '@/app/routes';
 
-export const SignIn = ({
-  callbackUrl = BO_ROUTES.ROOT,
-}: {
-  callbackUrl?: string;
-}) => {
+export const SignIn = ({ callbackUrl = BO_ROUTES.ROOT }: { callbackUrl?: string }) => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
@@ -27,14 +23,14 @@ export const SignIn = ({
       password: values.password,
       callbackUrl,
     })
-      .catch((error) => console.log("error", error))
+      .catch((error) => console.log('error', error))
       .finally(() => setIsLoading(false));
   };
 
   return (
-    <AuthBoxContainer title={"Bienvenue !"}>
+    <AuthBoxContainer title={'Bienvenue !'}>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: '', password: '' }}
         enableReinitialize
         onSubmit={(values, actions) => {
           handleSubmit(values);
@@ -46,26 +42,26 @@ export const SignIn = ({
           <VStack width="full" gap={4}>
             <FormTextInput
               name="email"
-              placeholder={"FORM.EMAIL_PLACEHOLDER"}
+              placeholder={'FORM.EMAIL_PLACEHOLDER'}
               value={values.email}
               leftAccessory={<Icons.Mail />}
             />
             <FormTextInput
               name="password"
               type="password"
-              placeholder={"FORM.PASSWORD_PLACEHOLDER"}
+              placeholder={'FORM.PASSWORD_PLACEHOLDER'}
               value={values.password}
             />
             <BaseButton
               withGradient
               isLoading={isLoading}
-              width={"full"}
-              colorType={"primary"}
+              width={'full'}
+              colorType={'primary'}
               onClick={() => {
                 handleSubmit();
               }}
             >
-              {t("COMMON.LOGIN")}
+              {t('COMMON.LOGIN')}
             </BaseButton>
           </VStack>
         )}
