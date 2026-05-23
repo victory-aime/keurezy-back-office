@@ -1,5 +1,5 @@
-import type { NextConfig } from "next";
-import CopyPlugin from "copy-webpack-plugin";
+import type { NextConfig } from 'next';
+import CopyPlugin from 'copy-webpack-plugin';
 
 const nextConfig: NextConfig = {
   webpack: (config) => {
@@ -7,8 +7,8 @@ const nextConfig: NextConfig = {
       new CopyPlugin({
         patterns: [
           {
-            from: "node_modules/pdfjs-dist/build/pdf.worker.min.mjs",
-            to: "../public/pdf.worker.min.mjs",
+            from: 'node_modules/pdfjs-dist/build/pdf.worker.min.mjs',
+            to: '../public/pdf.worker.min.mjs',
           },
         ],
       }),
@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/v1/:path*",
+        source: '/api/v1/:path*',
         destination: `${process.env.API_BACKEND_URL}/api/v1/:path*`,
       },
     ];
@@ -30,19 +30,19 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "platform-lookaside.fbsbx.com",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'platform-lookaside.fbsbx.com',
+        pathname: '/**',
       },
       {
-        protocol: "https",
-        hostname: "avatar.iran.liara.run",
-        pathname: "/**",
+        protocol: 'https',
+        hostname: 'avatar.iran.liara.run',
+        pathname: '/**',
       },
     ],
   },

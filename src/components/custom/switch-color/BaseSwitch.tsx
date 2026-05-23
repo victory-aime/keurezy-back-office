@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { Switch } from "@chakra-ui/react";
-import { Loader } from "_components/custom";
+import React, { FC } from 'react';
+import { Switch } from '@chakra-ui/react';
+import { Loader } from '_components/custom';
 
 interface BaseSwitchProps {
   hideIcon?: boolean;
@@ -21,8 +21,8 @@ export const BaseSwitch: FC<BaseSwitchProps> = ({
     <Switch.Root
       checked={isChecked}
       onCheckedChange={(value) => onSwitchChange(value.checked)}
-      colorPalette={"purple"}
-      size={"md"}
+      colorPalette={'purple'}
+      size={'md'}
       disabled={isDisabled}
     >
       {isLoading ? (

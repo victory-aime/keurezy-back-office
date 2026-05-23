@@ -1,5 +1,5 @@
-import { Session } from "better-auth";
-import React, { ReactNode } from "react";
+import { Session } from 'better-auth';
+import React, { ReactNode } from 'react';
 
 export interface IMobileSidebar {
   isOpen: boolean;
@@ -35,22 +35,6 @@ export type subItems = SimpleSubItem[];
 export interface SideBarProps {
   onShowSidebar: () => void;
   sideToggled: boolean;
-  data: {
-    session?: Session;
-    user?:
-      | {
-          id: string;
-          createdAt: Date;
-          updatedAt: Date;
-          email: string;
-          emailVerified: boolean;
-          name: string;
-          image?: string | null | undefined;
-          role?: string;
-        }
-      | null
-      | undefined;
-  };
 }
 
 export interface SimpleSubItem {
@@ -107,6 +91,6 @@ export interface AuthContextType {
 export interface SideToolTipProps {
   children: ReactNode;
   label: string;
-  placement?: "left" | "right" | "top" | "bottom";
+  placement?: 'left' | 'right' | 'top' | 'bottom';
   disabled?: boolean;
 }

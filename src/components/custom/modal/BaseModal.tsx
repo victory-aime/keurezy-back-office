@@ -5,25 +5,25 @@ import {
   DialogContent,
   DialogFooter,
   DialogRoot,
-} from "_components/ui/dialog";
-import { DialogFooterProps, Flex, VStack } from "@chakra-ui/react";
-import { BaseButton } from "../button";
-import { ModalProps } from "./interface/modal";
-import { BaseIcon } from "../base-icon";
-import { useTranslation } from "react-i18next";
-import { BaseTag, BaseText, TextVariant } from "_components/custom";
-import { useWindowSize } from "react-use";
+} from '_components/ui/dialog';
+import { DialogFooterProps, Flex, VStack } from '@chakra-ui/react';
+import { BaseButton } from '../button';
+import { ModalProps } from './interface/modal';
+import { BaseIcon } from '../base-icon';
+import { useTranslation } from 'react-i18next';
+import { BaseTag, BaseText, TextVariant } from '_components/custom';
+import { useWindowSize } from 'react-use';
 
 const BaseModal = ({
   isOpen = false,
   ignoreFooter = false,
   onChange,
-  title = "Modal Title",
-  description = "",
-  colorSaveButton = "primary",
-  colorCancelButton = "danger",
-  buttonSaveTitle = "COMMON.VALIDATE",
-  buttonCancelTitle = "COMMON.CANCEL",
+  title = 'Modal Title',
+  description = '',
+  colorSaveButton = 'primary',
+  colorCancelButton = 'danger',
+  buttonSaveTitle = 'COMMON.VALIDATE',
+  buttonCancelTitle = 'COMMON.CANCEL',
   status,
   showCloseButton = true,
   isLoading,
@@ -31,7 +31,7 @@ const BaseModal = ({
   isFull,
   modalType,
   icon,
-  iconBackgroundColor = "primary.500",
+  iconBackgroundColor = 'primary.500',
   children,
   disabled,
   ref,
@@ -40,9 +40,9 @@ const BaseModal = ({
   iconSaveButton,
   iconRejectButton,
   onReject,
-  buttonRejectTitle = "",
+  buttonRejectTitle = '',
   colorRejectButton,
-  scrollBehavior = "inside",
+  scrollBehavior = 'inside',
   ...rest
 }: ModalProps & DialogFooterProps) => {
   const { t } = useTranslation();
@@ -53,32 +53,26 @@ const BaseModal = ({
       open={isOpen}
       lazyMount
       onOpenChange={(e) => onChange?.(e?.open)}
-      placement={"center"}
+      placement={'center'}
       role={modalType}
-      size={{ mdDown: "full", sm: rest.size ?? "lg" }}
+      size={{ mdDown: 'full', sm: rest.size ?? 'lg' }}
       motionPreset="slide-in-top"
       scrollBehavior={scrollBehavior}
       {...rest}
     >
-      <DialogContent width={"full"} p={4}>
-        <Flex alignItems={"center"} gap={4} mb={4}>
+      <DialogContent width={'full'} p={4}>
+        <Flex alignItems={'center'} gap={4} mb={4}>
           {icon && (
             <BaseIcon
-              borderRadius={"7px"}
-              color={
-                modalType === "alertdialog" ? "red.500" : iconBackgroundColor
-              }
+              borderRadius={'7px'}
+              color={modalType === 'alertdialog' ? 'red.500' : iconBackgroundColor}
             >
               {icon}
             </BaseIcon>
           )}
-          <VStack gap={0} alignItems={"flex-start"}>
+          <VStack gap={0} alignItems={'flex-start'}>
             <BaseText variant={TextVariant.S}>{t(title)}</BaseText>
-            <BaseText
-              variant={TextVariant.S}
-              fontWeight={"light"}
-              color={"gray.400"}
-            >
+            <BaseText variant={TextVariant.S} fontWeight={'light'} color={'gray.400'}>
               {t(description)}
             </BaseText>
           </VStack>
@@ -93,8 +87,8 @@ const BaseModal = ({
             <DialogFooter
               mt={4}
               pr={3}
-              alignItems={"center"}
-              justifyContent={"center"}
+              alignItems={'center'}
+              justifyContent={'center'}
               gap={4}
               {...rest}
             >
@@ -108,13 +102,9 @@ const BaseModal = ({
                         disabled={disabled}
                         withGradient
                         onClick={() => onChange?.(!isOpen)}
-                        variant={"outline"}
+                        variant={'outline'}
                         leftIcon={iconCancelButton}
-                        colorType={
-                          modalType === "alertdialog"
-                            ? "danger"
-                            : colorCancelButton
-                        }
+                        colorType={modalType === 'alertdialog' ? 'danger' : colorCancelButton}
                       >
                         {t(buttonCancelTitle)}
                       </BaseButton>
@@ -125,7 +115,7 @@ const BaseModal = ({
                     <BaseButton
                       variant="outline"
                       disabled={disabled}
-                      colorType={colorRejectButton ?? "danger"}
+                      colorType={colorRejectButton ?? 'danger'}
                       onClick={() => onReject?.()}
                       leftIcon={iconRejectButton}
                     >
@@ -138,9 +128,7 @@ const BaseModal = ({
                       withGradient
                       onClick={() => onClick?.()}
                       leftIcon={iconSaveButton}
-                      colorType={
-                        modalType === "alertdialog" ? "danger" : colorSaveButton
-                      }
+                      colorType={modalType === 'alertdialog' ? 'danger' : colorSaveButton}
                     >
                       {t(buttonSaveTitle)}
                     </BaseButton>

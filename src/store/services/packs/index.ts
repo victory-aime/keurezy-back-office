@@ -1,1 +1,1 @@
-export * from "./packs.service";
+export * from './packs.service';

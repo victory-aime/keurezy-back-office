@@ -16,7 +16,7 @@
   },
   "WELCOME": "Bonjour {{username}}",
   "FORM": {
-    "LOGIN_TITLE": "MyIMMO",
+    "LOGIN_TITLE": "Keurezy",
     "LOGIN_DESC": "Votre plateforme de location immobilière tout-en-un",
     "EMAIL": "Adresse e-mail",
     "EMAIL_PLACEHOLDER": "Entrez votre adresse e-mail",
@@ -76,10 +76,12 @@
     "LOGOUT_DESC": "Voulez-vous vraiment vous déconnecter ?",
     "LOADING_TEXT": "Patientez",
     "SEND": "Envoyer",
+    "PUBLISH": "Publier",
     "CANCEL": "Annuler",
     "VALIDATE": "Valider",
     "DEACTIVATE": "Désactiver",
     "EDIT": "Modifier",
+    "ASSIGN": "Assigner",
     "CREATED_BY": "Créé par",
     "CREATED_AT": "Créé le",
     "EDIT_BY": "Modifier par",
@@ -114,14 +116,21 @@
       "ACTIVE": "Actif",
       "INACTIVE": "Inactif",
       "PENDING": "En attente",
-      "CANCELED": "Annulée",
+      "CANCELLED": "Annulée",
       "EXPIRED": "Expiree",
       "AVAILABLE": "Disponible",
+      "UNAVAILABLE": "Indisponible",
       "RENTED": "Occupé",
       "RESERVED": "Réserver",
       "CLOSED": "Fermer",
       "REJECTED": "Rejetée",
-      "ACCEPTED": "Acceptée"
+      "ACCEPTED": "Acceptée",
+      "CURRENTLY_ON_SALE": "vente en cours",
+      "SOLD": "Vendu",
+      "NEW": "Nouvelle",
+      "PLANNED": "Planifiée",
+      "DONE": "Terminée",
+      "CONFIRMED": "Confirmée"
     },
     "TODAY": "Aujourd'hui",
     "MONTH": "Mois",
@@ -220,10 +229,11 @@
     "SECURITY": {
       "PASSWORD": "Mot de passe",
       "PASSWORD_DESC": "Définissez un mot de passe sécurisé pour protéger votre compte.",
-      "PASSWORD_INFO": "Votre mot de passe doit contenir au minimum 12 caractères, avec au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial (ex. ! @ # $ %). Évitez d'utiliser des informations personnelles ou des mots de passe trop simples.",
+      "PASSWORD_INFO": "Votre mot de passe doit contenir au minimum 8 caractères, avec au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial (ex. ! @ # $ %). Évitez d'utiliser des informations personnelles ou des mots de passe trop simples.",
       "PASS_KEY": "Clés d'accès (Passkeys)",
       "PASS_KEY_DESC": "Ajoutez une ou plusieurs clés d'accès pour vous connecter sans mot de passe. Utilisez la reconnaissance faciale, une empreinte ou un appareil sécurisé compatible.",
       "ADD_PASS_KEY": "Ajouter une clé",
+      "PASS_KEY_NAME": "Nom de la clé",
       "ADD_PASS_KEY_INFO": "Vous allez être redirigé vers une interface sécurisée pour ajouter une nouvelle clé d'accès (passkey). Cette opération vous permettra de vous connecter sans mot de passe à l'avenir, à l'aide d'un appareil compatible (empreinte digitale, reconnaissance faciale ou code PIN).",
       "UNKNOW_DEVICE": "Appareil inconnu",
       "PASS_KEY_NO_FOUND": "Aucune clé détectée.",
@@ -235,27 +245,63 @@
       "IP_ADDRESS": "Adresse IP Hôte"
     }
   },
+
   "PERMISSIONS": {
     "MODULES": {
-      "PROPERTIES": "Propriétés",
-      "LEADS": "Leads",
-      "REPORTS": "Rapports",
-      "ACCOUNTING": "Comptabilité",
-      "USERS": "Utilisateurs"
+      "KPI": "Vue 360°",
+      "USERS": "Gestion des utilisateurs",
+      "PAYMENTS": "Gestion des paiements",
+      "PROPERTIES": "Gestion des biens",
+      "ANNONCES": "Gestion des annonces"
     },
     "FEATURE_LIST": {
-      "MANAGE_PROPERTIES": "Gérer les propriétés",
-      "MANAGE_LEADS": "Gérer les leads",
-      "MANAGE_REPORTS": "Gérer les rapports",
-      "MANAGE_ACCOUNTING": "Gérer la comptabilité",
-      "MANAGE_USERS": "Inviter des collaborateurs"
+      "MANAGE_PROPERTIES": "Gérer les biens immobiliers",
+      "PUBLISH_PROPERTIES": "Publier des annonces immobilières",
+      "MANAGE_USERS": "Gérer les utilisateurs et collaborateurs",
+      "PREMIUM_SUPPORT": "Support premium prioritaire",
+      "BOOST_ANNONCES": "Booster les annonces immobilières",
+
+      "VIEW_PAYMENT": "Voir les paiements",
+      "ADD_PAYMENT": "Ajouter un paiement",
+      "DOWNLOAD_PAYMENT": "Télécharger un reçu de paiement",
+      "EDIT_PAYMENT": "Modifier un paiement",
+      "DELETE_PAYMENT": "Supprimer un paiement"
     }
   },
+
   "SUBSCRIPTION": {
+    "PLAN_CATEGORY": {
+      "COMMISSION_BASED": "Commission",
+      "SUBSCRIPTION_BASED": "Abonnement"
+    },
+
+    "PRICING_TYPE": {
+      "COMMISSION": "Commission",
+      "SUBSCRIPTION": "Abonnement"
+    },
+
+    "BILLING_CYCLE": {
+      "MONTHLY": "Mensuel",
+      "YEARLY": "Annuel"
+    },
+
     "PLANS": {
-      "BASIC": "Débutant",
-      "PRO": "Professionnel",
-      "PREMIUM": "Entreprise"
+      "DESCRIPTIONS": {
+        "BASIC_COMMISSION": "Idéal pour démarrer avec une faible commission.",
+        "STANDARD_COMMISSION": "Un équilibre parfait entre visibilité et rentabilité.",
+        "PREMIUM_COMMISSION": "La solution premium avec des fonctionnalités illimitées.",
+
+        "BASIC_SUB": "Une formule accessible pour les petites agences.",
+        "STANDARD_SUB": "Une offre complète pour les agences en croissance.",
+        "PREMIUM_SUB": "Toutes les fonctionnalités avancées pour les grandes agences."
+      },
+      "BASIC_COMMISSION": "Commission Débutant",
+      "STANDARD_COMMISSION": "Commission Standard",
+      "PREMIUM_COMMISSION": "Commission Entreprise",
+
+      "BASIC_SUB": "Abonnement Débutant",
+      "STANDARD_SUB": "Abonnement Standard",
+      "PREMIUM_SUB": "Abonnement Entreprise"
     }
   }
 }

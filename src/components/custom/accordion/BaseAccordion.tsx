@@ -1,40 +1,37 @@
-"use client";
+'use client';
 
-import { Icon } from "@chakra-ui/react";
+import { Flex, HStack, Icon, Stack } from '@chakra-ui/react';
 import {
   AccordionItem,
   AccordionItemContent,
   AccordionItemTrigger,
   AccordionRoot,
-} from "_components/ui/accordion";
-import React, { FC, useState } from "react";
-import {
-  AccordionProps,
-  BaseText,
-  CustomSkeletonLoader,
-} from "_components/custom";
-import { hexToRGB } from "_theme/colors";
-import { NoDataAnimation } from "_components/custom/data-table/NoDataAnimation";
+} from '_components/ui/accordion';
+import React, { FC, useState } from 'react';
+import { BaseTag, BaseText, CustomSkeletonLoader } from '_components/custom';
+import { NoDataAnimation } from '_components/custom/data-table/NoDataAnimation';
+import { BaseAccordionProps } from './interface/accordion';
+import { useThemeColors } from '_theme/useThemeColors';
 
-export const BaseAccordion: FC<AccordionProps> = ({
+export const BaseAccordion: FC<BaseAccordionProps> = ({
   items,
   activeBg = true,
   multipleOpen = false,
   isLoading,
+  itemContentProps,
   ...rest
 }) => {
-  const [openValues, setOpenValues] = useState<string[]>(
-    items[0] ? [items[0].label] : [],
-  );
+  const { hexToRGB } = useThemeColors();
+  const [openValues, setOpenValues] = useState<string[]>(items[0] ? [items[0].label] : []);
 
   return (
     <>
       {!items ? (
-        <NoDataAnimation animationType={"folder"} />
+        <NoDataAnimation animationType={'folder'} />
       ) : (
         <AccordionRoot
-          width={"full"}
-          variant={"plain"}
+          width={'full'}
+          variant={'plain'}
           collapsible
           multiple={multipleOpen}
           value={openValues}
@@ -48,28 +45,29 @@ export const BaseAccordion: FC<AccordionProps> = ({
             return (
               <AccordionItem key={index} value={item.label} mt="3">
                 <AccordionItemTrigger
-                  bgColor={isOpen ? hexToRGB("primary", 0.3) : "none"}
-                  borderColor={isOpen ? hexToRGB("primary", 0.3) : "none"}
+                  bgColor={isOpen ? hexToRGB(500, 0.3) : 'none'}
+                  borderColor={isOpen ? hexToRGB(500, 0.3) : 'none'}
                   borderWidth={1.5}
                   p="3"
                   borderRadius="7px"
                   cursor="pointer"
                 >
                   {isLoading ? (
-                    <CustomSkeletonLoader
-                      type="TEXT"
-                      numberOfLines={1}
-                      width="full"
-                    />
+                    <CustomSkeletonLoader type="TEXT" numberOfLines={1} width="full" />
                   ) : (
-                    <>
-                      {item.icon && (
-                        <Icon fontSize="lg" color="fg.subtle">
-                          {item.icon}
-                        </Icon>
+                    <Flex width={'full'} justifyContent={'space-between'}>
+                      <HStack>
+                        {item.icon && (
+                          <Icon fontSize="lg" color="fg.subtle">
+                            {item.icon}
+                          </Icon>
+                        )}
+                        <BaseText>{item.label}</BaseText>
+                      </HStack>
+                      {item?.selectedLength! > 0 && (
+                        <BaseTag color={'blue'} label={item?.selectedLength} />
                       )}
-                      <BaseText>{item.label}</BaseText>
-                    </>
+                    </Flex>
                   )}
                 </AccordionItemTrigger>
                 {isLoading ? (
@@ -78,8 +76,9 @@ export const BaseAccordion: FC<AccordionProps> = ({
                   <AccordionItemContent
                     p="3"
                     mt="4"
-                    bgColor={activeBg ? hexToRGB("lighter", 0.1) : "none"}
+                    //bgColor={activeBg ? hexToRGB(500,0.1) : "none"}
                     borderRadius="7px"
+                    {...itemContentProps}
                   >
                     {item.content}
                   </AccordionItemContent>

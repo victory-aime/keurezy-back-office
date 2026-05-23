@@ -1,5 +1,5 @@
-import { BaseApi } from "rise-core-frontend";
-import { MODELS } from "_types/index";
+import { BaseApi } from 'rise-core-frontend';
+import { MODELS } from '_types/index';
 
 /**
  * UserService provides methods for handling user-related operations
@@ -7,10 +7,7 @@ import { MODELS } from "_types/index";
  */
 export class UserService extends BaseApi {
   user_info(userId: MODELS.IUser) {
-    return this.apiService.invoke(
-      this.applicationContext.getApiConfig().USER.INFO,
-      { userId },
-    );
+    return this.apiService.invoke(this.applicationContext.getApiConfig().USER.INFO, { userId });
   }
 
   getAllUsers(data: { initialPage: number; limitPerPage: number }) {

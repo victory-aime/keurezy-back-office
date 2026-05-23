@@ -1,7 +1,9 @@
-import { useCallback, useState } from "react";
-import { authClient } from "../lib/auth-client";
-import { handleApiSuccess } from "../../utils/handleApiSuccess";
-import { handleApiError } from "../../utils/handleApiError";
+'use client';
+
+import { useCallback, useState } from 'react';
+import { authClient } from '../lib/auth-client';
+import { handleApiSuccess } from '_utils/handleApiSuccess';
+import { handleApiError } from '_utils/handleApiError';
 
 export const useTotp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,14 +18,14 @@ export const useTotp = () => {
       if (error) {
         return {
           status: error.status,
-          message: error.statusText ?? "Code de vérification invalide",
+          message: error.statusText ?? 'Code de vérification invalide',
         };
       }
       return data;
     } catch (e) {
       return {
         status: 500,
-        message: "Erreur inattendue",
+        message: 'Erreur inattendue',
       };
     } finally {
       setIsLoading(false);
@@ -58,7 +60,7 @@ export const useTotp = () => {
       if (data?.status) {
         handleApiSuccess({
           status: 201,
-          message: "TOTP désactivé",
+          message: 'TOTP désactivé',
         });
         return true;
       }

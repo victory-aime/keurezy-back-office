@@ -1,17 +1,10 @@
-"use client";
+'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  ReactNode,
-  createContext,
-  useContext,
-} from "react";
-import { BaseToast, ToastStatus } from "_components/custom";
-import { toaster } from "_components/ui/toaster";
-import { retrySessionRequest } from "_utils/retrySessionRequest";
-import { authClient } from "../lib/auth-client";
+import { useCallback, useEffect, useRef, ReactNode, createContext, useContext } from 'react';
+import { BaseToast, ToastStatus } from '_components/custom';
+import { toaster } from '_components/ui/toaster';
+import { retrySessionRequest } from '_utils/retrySessionRequest';
+import { authClient } from '../lib/auth-client';
 
 const SessionContext = createContext<
   | {
@@ -20,13 +13,18 @@ const SessionContext = createContext<
   | undefined
 >(undefined);
 
-export function SessionRefreshProvider({ children }: { children: ReactNode }) {
-  const { error, refetch: refetchSession } = authClient.useSession();
+export function SessionRefreshProvider({
+  children,
+  error,
+}: {
+  children: ReactNode;
+  error?: string;
+}) {
+  const { refetch: refetchSession } = authClient.useSession();
   const isRetryingRef = useRef(false);
-  const toastId = "session-error-toast";
+  const toastId = 'session-error-toast';
 
-  const isServerError =
-    error?.status === 500 || error?.statusText === "Internal Server Error";
+  const isServerError = error;
 
   const startRetry = useCallback(async () => {
     if (!navigator.onLine) return;
@@ -40,24 +38,26 @@ export function SessionRefreshProvider({ children }: { children: ReactNode }) {
       asPromise: {
         promise: retrySessionRequest()
           .then(async () => {
-            await refetchSession();
             BaseToast({
               id: `${toastId}-final`,
-              title: "Connexion rétablie",
-              description: "Votre session est active.",
+              title: 'Connexion rétablie',
+              description: 'Votre session est active.',
               type: ToastStatus.SUCCESS,
+            });
+            await refetchSession().then(() => {
+              console.log('session refreshed');
+              window.location.reload();
             });
           })
           .catch(() =>
             BaseToast({
               id: `${toastId}-error`,
-              title: "Connexion impossible",
-              description:
-                "Le serveur ne répond toujours pas. Vérifiez votre connexion.",
+              title: 'Connexion impossible',
+              description: 'Le serveur ne répond toujours pas. Vérifiez votre connexion.',
               type: ToastStatus.ERROR,
               persist: true,
               action: {
-                label: "Réessayer",
+                label: 'Réessayer',
                 onClick: () => {
                   toaster.dismiss(`${toastId}-error`);
                   isRetryingRef.current = false;
@@ -68,8 +68,8 @@ export function SessionRefreshProvider({ children }: { children: ReactNode }) {
           ),
         config: {
           loading: {
-            title: "Tentative de reconnexion...",
-            description: "Nous essayons de restaurer votre session.",
+            title: 'Tentative de reconnexion...',
+            description: 'Nous essayons de restaurer votre session.',
           },
         },
       },
@@ -83,9 +83,7 @@ export function SessionRefreshProvider({ children }: { children: ReactNode }) {
   }, [isServerError, startRetry]);
 
   return (
-    <SessionContext.Provider
-      value={{ dismissToast: () => toaster.dismiss(`${toastId}-error`) }}
-    >
+    <SessionContext.Provider value={{ dismissToast: () => toaster.dismiss(`${toastId}-error`) }}>
       {children}
     </SessionContext.Provider>
   );
@@ -94,9 +92,7 @@ export function SessionRefreshProvider({ children }: { children: ReactNode }) {
 export function useSessionRefreshContext() {
   const context = useContext(SessionContext);
   if (context === undefined) {
-    throw new Error(
-      "useSessionRefreshContext must be used within an SessionRefreshProvider",
-    );
+    throw new Error('useSessionRefreshContext must be used within an SessionRefreshProvider');
   }
   return context;
 }

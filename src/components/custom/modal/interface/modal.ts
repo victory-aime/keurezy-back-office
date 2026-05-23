@@ -1,7 +1,7 @@
-import { DialogRootProps } from "@chakra-ui/react";
-import { ReactNode } from "react";
-import { variantColorType } from "_components/custom";
-import { ENUM } from "_types/*";
+import { DialogRootProps } from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import { variantColorType } from '_components/custom';
+import { ENUM } from '_types/*';
 
 interface ModalProps extends DialogRootProps {
   title?: string | undefined;
@@ -10,7 +10,7 @@ interface ModalProps extends DialogRootProps {
   onChange?: (value: boolean) => void;
   showCloseButton?: boolean;
   ignoreFooter?: boolean;
-  modalType?: "dialog" | "alertdialog" | undefined;
+  modalType?: 'dialog' | 'alertdialog' | undefined;
   buttonSaveTitle?: string;
   status?: ENUM.COMMON.Status;
   buttonCancelTitle?: string;
@@ -22,7 +22,7 @@ interface ModalProps extends DialogRootProps {
   buttonRejectTitle?: string;
   iconRejectButton?: React.ReactNode;
   colorRejectButton?: variantColorType;
-  scrollBehavior?: "inside" | "outside";
+  scrollBehavior?: 'inside' | 'outside';
   isFull?: boolean | undefined;
   icon?: ReactNode;
   logoSrc?: string;

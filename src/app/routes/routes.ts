@@ -1,17 +1,24 @@
 export enum ROUTES {
-  USERS = "/users",
-  PACKS = "/packs",
+  USERS = 'users',
+  PACKS = 'packs',
+  DASHBOARD = '/dashboard',
 }
 
+export const APP_ROUTES = {
+  ROOT: '/',
+  _2FA: '/totp',
+  SIGN_IN: '/signin',
+  PROTECTED: '/not-authenticated',
+};
+
 export const BO_ROUTES = {
-  ROOT: "/",
+  DASHBOARD: ROUTES.DASHBOARD,
   USERS: {
-    LIST: `${ROUTES.USERS}`,
-    DETAILS: `${ROUTES.USERS}/details`,
+    LIST: `${ROUTES.DASHBOARD}/${ROUTES.USERS}`,
+    DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.USERS}/details`,
   },
   PACKS: {
-    LIST: `${ROUTES.PACKS}`,
-    DETAILS: `${ROUTES.PACKS}/details`,
+    LIST: `${ROUTES.DASHBOARD}/${ROUTES.PACKS}`,
+    DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.PACKS}/details`,
   },
-  _2FA: "/totp",
 };

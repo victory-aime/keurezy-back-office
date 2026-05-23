@@ -1,7 +1,7 @@
 export enum StorageKey {
-  LANGUAGE = "app-language",
+  LANGUAGE = 'app-language',
 }
 
 export enum ProviderKeys {
-  GOOGLE = "google",
+  GOOGLE = 'google',
 }
