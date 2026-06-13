@@ -15,7 +15,7 @@ export const CustomSkeletonLoader: FunctionComponent<CustomSkeletonLoaderProps> 
   statisticBars = 4,
   colorButton = 'info',
   count = 4,
-  raduis = '7px',
+  radius = '7px',
 }) => {
   const DefaultBlockLoader = <Skeleton height={height} variant={variant} />;
 
@@ -35,15 +35,10 @@ export const CustomSkeletonLoader: FunctionComponent<CustomSkeletonLoaderProps> 
     </Table.Root>
   );
 
-  const PublicProductCard = (
-    <SimpleGrid columns={{ base: 2, md: 4 }} width="full">
-      {Array.from({ length: 6 }, (_, i) => (
-        <Box key={i} p={5} width="full">
-          <Skeleton borderRadius="7px" height={height} variant={variant} />
-          <Stack mt={4}>
-            <SkeletonText variant={variant} noOfLines={numberOfLines} />
-          </Stack>
-        </Box>
+  const PacksCard = (
+    <SimpleGrid columns={{ base: 2, sm: 4 }} width="full">
+      {Array.from({ length: tableRows }, (_, i) => (
+        <Skeleton borderRadius="7px" height={height} variant={variant} />
       ))}
     </SimpleGrid>
   );
@@ -115,20 +110,25 @@ export const CustomSkeletonLoader: FunctionComponent<CustomSkeletonLoaderProps> 
     <SkeletonText noOfLines={numberOfLines} gap={2} variant={variant} width={width} />
   );
 
-  const SkeletonFormLoader = <Skeleton height={height} width={width} variant={variant} />;
+  const SkeletonFormLoader = <Skeleton height={height} variant={variant} width={width} />;
 
   const SkeletonImage = <Skeleton height={height} />;
 
   const SkeletonTextImage = (
-    <Flex gap={direction === 'column' ? 4 : 1} flexDir={direction} width={width}>
-      <Skeleton height={height} />
+    <Flex
+      gap={direction === 'column' ? 4 : 1}
+      flexDir={direction}
+      width={width}
+      alignItems={'center'}
+    >
+      <Skeleton height={'16'} width={'16'} borderRadius={radius} />
       <Flex width={width}>
         <SkeletonText noOfLines={numberOfLines} variant={variant} gap={3} />
       </Flex>
     </Flex>
   );
 
-  const SkeletionCircle = (
+  const CustomSkeletonCircle = (
     <Flex width={width} alignItems={'center'} gap={4} flexDir={direction}>
       <SkeletonCircle size="10" />
       {numberOfLines && <SkeletonText noOfLines={numberOfLines} variant={variant} gap={3} />}
@@ -137,7 +137,7 @@ export const CustomSkeletonLoader: FunctionComponent<CustomSkeletonLoaderProps> 
 
   const SkeletonButton = (
     <Skeleton asChild loading={true} width={width}>
-      <BaseButton width={width} colorType={colorButton} borderRadius={raduis} />
+      <BaseButton width={width} colorType={colorButton} borderRadius={radius} />
     </Skeleton>
   );
 
@@ -166,7 +166,7 @@ export const CustomSkeletonLoader: FunctionComponent<CustomSkeletonLoaderProps> 
       case 'LINE_CHART':
         return LineChartLoader;
       case 'PRODUCT_LIST_CARD':
-        return PublicProductCard;
+        return PacksCard;
       case 'DEFAULT':
         return DefaultBlockLoader;
       case 'TEXT':
@@ -182,7 +182,7 @@ export const CustomSkeletonLoader: FunctionComponent<CustomSkeletonLoaderProps> 
       case 'DATA_GRID':
         return GridLoader;
       case 'CIRCLE':
-        return SkeletionCircle;
+        return CustomSkeletonCircle;
       default:
         return null;
     }

@@ -1,89 +1,110 @@
 'use client';
-import { FormContainer } from '@/app/components/FormContainer';
-import { APP_ROUTES, BO_ROUTES } from '@/app/routes';
-import { BaseAccordion, Icons } from '_components/custom';
+import { BO_ROUTES } from '@/app/routes';
+import { BaseButton, BaseContainer, BaseTabs, BaseTag, BaseText, Icons } from '_components/custom';
 import { UserModule } from '_store/state-management';
-import { useState } from 'react';
 import { ProfileSection } from './ProfileSection';
-import { SecuritySection } from './SecuritySection';
 import { SessionSection } from './SessionSection';
-import { AgenceSection } from './AgenceSection';
-import { DocumentPreviewModal } from './DocumentPreviewModal';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import { Avatar } from '_components/ui/avatar';
+import { IsDetailsDataLoad } from '@/app/components/DetailsLoad';
+import { useRouter } from 'next/navigation';
+import { ENUM } from '@/types';
+import { Status } from '@/types/enum/common';
 
 export const UserDetails = ({ userId }: { userId: string }) => {
-  const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const { data: userData, isLoading } = UserModule.getUserQueries({
+  const router = useRouter();
+  const {
+    data: userData,
+    isFetching: isLoading,
+    refetch,
+  } = UserModule.getUserQueries({
     params: { userId },
     queryOptions: { enabled: !!userId },
   });
 
-  const handleOpenDoc = (url: string) => {
-    setSelectedDoc(url);
-    setIsOpen(true);
-  };
+  const { mutateAsync: updateUser, isPending } = UserModule.updateUserMutation({
+    mutationOptions: {
+      onSuccess: async () => {
+        await refetch();
+      },
+    },
+  });
 
-  const getFileNameFromUrl = (url: string) => {
-    try {
-      return url.split('/').pop()?.split('?')[0];
-    } catch {
-      return 'document';
-    }
-  };
-
-  if (!userId) {
-    return (window.location.href = APP_ROUTES.ROOT);
-  }
+  const isActive = userData?.status === ENUM.COMMON.Status.ACTIVE;
 
   const userDetailsAccordions = [
-    // ================= PROFILE =================
     {
-      label: 'Profile',
+      label: 'Informations',
       icon: <Icons.User />,
       content: <ProfileSection data={userData} />,
     },
-
-    // ================= SECURITY =================
-    {
-      label: 'Sécurité',
-      icon: <Icons.Shield />,
-      content: <SecuritySection data={userData} />,
-    },
-
-    // ================= SESSIONS =================
     {
       label: 'Sessions',
       icon: <Icons.Desktop />,
       content: <SessionSection data={userData} />,
-      selectedLength: userData?.sessions?.length,
-    },
-
-    // ================= AGENCE =================
-    {
-      label: 'Agence',
-      icon: <Icons.RiBuildingLine />,
-      content: (
-        <AgenceSection
-          data={userData}
-          handleOpenDoc={handleOpenDoc}
-          getFileNameFromUrl={getFileNameFromUrl}
-        />
-      ),
+      totalItems: userData?.sessions?.length,
     },
   ];
 
   return (
-    <Box width={'full'}>
-      <FormContainer
-        pageTitle={"Détail de l'utilisateur"}
-        pageDescription={'Visualisation des informations utilisateur'}
-        isLoading={false}
-      >
-        <BaseAccordion items={userDetailsAccordions} multipleOpen isLoading={isLoading} />
-      </FormContainer>
-      <DocumentPreviewModal isOpen={isOpen} onChange={setIsOpen} data={selectedDoc} />
-    </Box>
+    <BaseContainer border={'none'}>
+      {isLoading ? (
+        <IsDetailsDataLoad />
+      ) : (
+        <>
+          <Flex align={{ base: 'flex-start', sm: 'center' }} justify="space-between" width="100%">
+            <Flex align="center" gap={4}>
+              <Avatar size="lg" colorPalette="blue" name={userData?.name} />
+              <Box>
+                <Flex align="center" gap={2} mb={1} flexWrap="wrap">
+                  <BaseText fontSize="xl" fontWeight="600" textTransform={'uppercase'}>
+                    {userData?.name}
+                  </BaseText>
+                  <BaseTag status={userData?.status} />
+                  <BaseTag
+                    status={userData?.status}
+                    colorPalette={'blue'}
+                    color={userData?.role === ENUM.AppRole.OWNER ? 'blue' : 'orange'}
+                    label={userData?.role === ENUM.AppRole.OWNER ? "Chef d'agence" : 'Utilisateur'}
+                  />
+                </Flex>
+                <BaseText fontSize="sm" color="gray.500">
+                  {[userData?.address, userData?.email, userData?.phone]
+                    .filter(Boolean)
+                    .join(' · ')}
+                </BaseText>
+              </Box>
+            </Flex>
+            <Flex gap={3}>
+              <BaseButton
+                variant={'outline'}
+                colorType={!isActive ? 'success' : 'danger'}
+                isLoading={isPending}
+                onClick={async () =>
+                  await updateUser({
+                    payload: { status: isActive ? Status.INACTIVE : Status.ACTIVE },
+                    params: { id: userData?.id! },
+                  })
+                }
+              >
+                {isActive ? 'Désactiver' : 'Activer'}
+              </BaseButton>
+              {userData?.owner?.agency?.id && (
+                <BaseButton
+                  variant={'outline'}
+                  colorType={'info'}
+                  onClick={async () => {
+                    router.push(`${BO_ROUTES.AGENCIES.DETAILS}?id=${userData?.owner?.agency?.id}`);
+                  }}
+                >
+                  Voir l'agence
+                </BaseButton>
+              )}
+            </Flex>
+          </Flex>
+          <BaseTabs width={'full'} variant={'line'} items={userDetailsAccordions} />
+        </>
+      )}
+    </BaseContainer>
   );
 };

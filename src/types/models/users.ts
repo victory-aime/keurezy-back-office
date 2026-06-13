@@ -1,17 +1,21 @@
-import { UserRole } from '../enum';
+import { AppRole, UserRole } from '../enum';
 import { Status } from '../enum/common';
 
 interface IUser {
   id?: string;
   name?: string;
   email?: string;
+  phone?: string;
+  address?: string;
   image?: string;
   emailVerified?: boolean;
+  theme_color?: string;
+  theme_mode?: string;
   twoFactorEnabled?: boolean;
   status?: Status | undefined;
-  role?: UserRole | undefined;
-  createdAt: string;
-  updatedAt: string;
+  role?: AppRole | undefined;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 interface IAccountUsers {
@@ -38,6 +42,7 @@ interface IUserSessions {
 interface IUserInfoResponse extends IUser {
   accounts: IAccountUsers[];
   sessions: IUserSessions[];
+  passkeys: { id?: string; name?: string }[];
   owner: {
     id: string;
     userId: string;

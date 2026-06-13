@@ -11,8 +11,8 @@ import { BaseButton } from '../button';
 import { ModalProps } from './interface/modal';
 import { BaseIcon } from '../base-icon';
 import { useTranslation } from 'react-i18next';
-import { BaseTag, BaseText, TextVariant } from '_components/custom';
-import { useWindowSize } from 'react-use';
+import { BaseTag, BaseText, Icons, TextVariant } from '_components/custom';
+import { VariablesColors } from '_theme/variables';
 
 const BaseModal = ({
   isOpen = false,
@@ -43,103 +43,123 @@ const BaseModal = ({
   buttonRejectTitle = '',
   colorRejectButton,
   scrollBehavior = 'inside',
+  showEditButton,
+  showDeleteButton,
+  onDelete,
+  onEdit,
   ...rest
 }: ModalProps & DialogFooterProps) => {
   const { t } = useTranslation();
-  const { width, height } = useWindowSize();
 
   return (
-    <DialogRoot
-      open={isOpen}
-      lazyMount
-      onOpenChange={(e) => onChange?.(e?.open)}
-      placement={'center'}
-      role={modalType}
-      size={{ mdDown: 'full', sm: rest.size ?? 'lg' }}
-      motionPreset="slide-in-top"
-      scrollBehavior={scrollBehavior}
-      {...rest}
-    >
-      <DialogContent width={'full'} p={4}>
-        <Flex alignItems={'center'} gap={4} mb={4}>
-          {icon && (
-            <BaseIcon
-              borderRadius={'7px'}
-              color={modalType === 'alertdialog' ? 'red.500' : iconBackgroundColor}
-            >
-              {icon}
-            </BaseIcon>
-          )}
-          <VStack gap={0} alignItems={'flex-start'}>
-            <BaseText variant={TextVariant.S}>{t(title)}</BaseText>
-            <BaseText variant={TextVariant.S} fontWeight={'light'} color={'gray.400'}>
-              {t(description)}
-            </BaseText>
-          </VStack>
-          {status && <BaseTag status={status} variant="subtle" />}
+    <>
+      <DialogRoot
+        open={isOpen}
+        lazyMount
+        onOpenChange={(e) => onChange?.(e?.open)}
+        placement={'center'}
+        role={modalType}
+        size={{ mdDown: 'full', sm: rest.size ?? 'lg' }}
+        motionPreset="slide-in-top"
+        scrollBehavior={scrollBehavior}
+        {...rest}
+      >
+        <DialogContent width={'full'} p={4}>
+          <Flex alignItems={'center'} gap={4} mb={4}>
+            {icon && (
+              <BaseIcon
+                borderRadius={'7px'}
+                color={modalType === 'alertdialog' ? 'red.500' : iconBackgroundColor}
+              >
+                {icon}
+              </BaseIcon>
+            )}
+            <VStack gap={0} alignItems={'flex-start'}>
+              <BaseText variant={TextVariant.S}>{t(title)}</BaseText>
+              <BaseText variant={TextVariant.S} fontWeight={'light'} color={'gray.400'}>
+                {t(description)}
+              </BaseText>
+            </VStack>
+            {status && <BaseTag status={status} variant="subtle" />}
 
-          {showCloseButton && <DialogCloseTrigger />}
-        </Flex>
+            {showEditButton && (
+              <Icons.Edit
+                color={VariablesColors.info}
+                cursor={'pointer'}
+                onClick={() => onEdit?.()}
+              />
+            )}
+            {showDeleteButton && (
+              <Icons.Trash
+                color={VariablesColors.danger}
+                cursor={'pointer'}
+                onClick={() => onDelete?.()}
+              />
+            )}
 
-        <DialogBody autoFocus={false} ref={ref} pr={3} pl={0}>
-          {children}
-          {!ignoreFooter ? (
-            <DialogFooter
-              mt={4}
-              pr={3}
-              alignItems={'center'}
-              justifyContent={'center'}
-              gap={4}
-              {...rest}
-            >
-              {isLoading ? (
-                <BaseButton isLoading />
-              ) : (
-                <>
-                  {buttonCancelTitle && (
-                    <DialogActionTrigger asChild>
+            {showCloseButton && <DialogCloseTrigger />}
+          </Flex>
+
+          <DialogBody autoFocus={false} ref={ref} pr={3} pl={0}>
+            {children}
+            {!ignoreFooter ? (
+              <DialogFooter
+                mt={4}
+                pr={3}
+                alignItems={'center'}
+                justifyContent={'center'}
+                gap={4}
+                {...rest}
+              >
+                {isLoading ? (
+                  <BaseButton isLoading />
+                ) : (
+                  <>
+                    {buttonCancelTitle && (
+                      <DialogActionTrigger asChild>
+                        <BaseButton
+                          disabled={disabled}
+                          withGradient
+                          onClick={() => onChange?.(!isOpen)}
+                          variant={'outline'}
+                          leftIcon={iconCancelButton}
+                          colorType={modalType === 'alertdialog' ? 'danger' : colorCancelButton}
+                        >
+                          {t(buttonCancelTitle)}
+                        </BaseButton>
+                      </DialogActionTrigger>
+                    )}
+                    {/* Reject = action métier */}
+                    {buttonRejectTitle && (
+                      <BaseButton
+                        variant="outline"
+                        disabled={disabled}
+                        colorType={colorRejectButton ?? 'danger'}
+                        onClick={() => onReject?.()}
+                        leftIcon={iconRejectButton}
+                      >
+                        {t(buttonRejectTitle)}
+                      </BaseButton>
+                    )}
+                    {buttonSaveTitle && (
                       <BaseButton
                         disabled={disabled}
                         withGradient
-                        onClick={() => onChange?.(!isOpen)}
-                        variant={'outline'}
-                        leftIcon={iconCancelButton}
-                        colorType={modalType === 'alertdialog' ? 'danger' : colorCancelButton}
+                        onClick={() => onClick?.()}
+                        leftIcon={iconSaveButton}
+                        colorType={modalType === 'alertdialog' ? 'danger' : colorSaveButton}
                       >
-                        {t(buttonCancelTitle)}
+                        {t(buttonSaveTitle)}
                       </BaseButton>
-                    </DialogActionTrigger>
-                  )}
-                  {/* Reject = action métier */}
-                  {buttonRejectTitle && (
-                    <BaseButton
-                      variant="outline"
-                      disabled={disabled}
-                      colorType={colorRejectButton ?? 'danger'}
-                      onClick={() => onReject?.()}
-                      leftIcon={iconRejectButton}
-                    >
-                      {t(buttonRejectTitle)}
-                    </BaseButton>
-                  )}
-                  {buttonSaveTitle && (
-                    <BaseButton
-                      disabled={disabled}
-                      withGradient
-                      onClick={() => onClick?.()}
-                      leftIcon={iconSaveButton}
-                      colorType={modalType === 'alertdialog' ? 'danger' : colorSaveButton}
-                    >
-                      {t(buttonSaveTitle)}
-                    </BaseButton>
-                  )}
-                </>
-              )}
-            </DialogFooter>
-          ) : null}
-        </DialogBody>
-      </DialogContent>
-    </DialogRoot>
+                    )}
+                  </>
+                )}
+              </DialogFooter>
+            ) : null}
+          </DialogBody>
+        </DialogContent>
+      </DialogRoot>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import { Icons } from '../icons';
 const STATUS_META: Partial<Record<ENUM.COMMON.Status, variantColorType>> = {
   ACTIVE: 'success',
   AVAILABLE: 'success',
+  OPEN: 'success',
   ACCEPTED: 'success',
   INACTIVE: 'danger',
   CLOSE: 'danger',
@@ -14,7 +15,7 @@ const STATUS_META: Partial<Record<ENUM.COMMON.Status, variantColorType>> = {
   CANCELLED: 'danger',
   PENDING: 'warning',
   UNAVAILABLE: 'warning',
-  MAINTENANCE: 'info',
+  MAINTENANCE: 'warning',
   CURRENTLY_ON_SALE: 'info',
   SOLD: 'warning',
   EXPIRED: 'info',

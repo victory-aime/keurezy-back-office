@@ -2,10 +2,13 @@ import { CgCreditCard, CgSync } from 'react-icons/cg';
 import {
   CiBellOff,
   CiBellOn,
+  CiCircleCheck,
   CiCloudOn,
+  CiDesktop,
   CiFilter,
   CiGrid42,
   CiLogout,
+  CiMap,
   CiMapPin,
   CiMobile3,
   CiPlay1,
@@ -14,14 +17,16 @@ import {
   CiUser,
   CiViewList,
   CiWarning,
-  CiCircleCheck,
-  CiDesktop,
 } from 'react-icons/ci';
-import { FaCog, FaUserAlt, FaUserPlus, FaUsers } from 'react-icons/fa';
+import { FaBook, FaUsers } from 'react-icons/fa6';
+import { FaCog, FaUserAlt, FaUserPlus } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import {
   HiHeart,
   HiHome,
+  HiMiniChevronLeft,
+  HiMiniChevronRight,
+  HiMiniMegaphone,
   HiMiniPlusSmall,
   HiOutlineFolderOpen,
   HiOutlineWrenchScrewdriver,
@@ -31,9 +36,11 @@ import {
   IoIosArrowRoundForward,
   IoIosCheckmark,
   IoIosClose,
+  IoIosCloseCircleOutline,
   IoIosGitPullRequest,
   IoIosHelpCircle,
   IoIosTrendingUp,
+  IoMdFingerPrint,
 } from 'react-icons/io';
 import {
   IoBarChartOutline,
@@ -41,11 +48,13 @@ import {
   IoChatbubblesOutline,
   IoCheckmarkDone,
   IoDocumentTextOutline,
+  IoLockClosed,
   IoRocketSharp,
   IoShieldCheckmarkSharp,
 } from 'react-icons/io5';
-import { RiSearch2Line } from 'react-icons/ri';
+import { RiMailSendLine, RiSearch2Line } from 'react-icons/ri';
 import {
+  TbFileDownload,
   TbLayoutSidebarRightCollapse,
   TbLayoutSidebarRightExpand,
   TbSparkles,
@@ -53,12 +62,21 @@ import {
 } from 'react-icons/tb';
 import { FaTrashAlt } from 'react-icons/fa';
 import { IoCopyOutline, IoDownloadOutline, IoKeyOutline, IoShareOutline } from 'react-icons/io5';
-import { MdEdit, MdLocalPhone } from 'react-icons/md';
+import { MdAssignmentInd, MdEdit, MdLocalPhone, MdWallet } from 'react-icons/md';
 import { PiBathtubLight, PiEyeLight } from 'react-icons/pi';
 import { GrMoney } from 'react-icons/gr';
 import { TbRestore } from 'react-icons/tb';
 import { RxDotsHorizontal, RxHamburgerMenu, RxLapTimer } from 'react-icons/rx';
-import { LuBuilding2, LuClipboardList, LuHeartHandshake, LuMaximize, LuSend } from 'react-icons/lu';
+import {
+  LuBuilding2,
+  LuClipboardList,
+  LuFile,
+  LuFileImage,
+  LuFiles,
+  LuHeartHandshake,
+  LuMaximize,
+  LuSend,
+} from 'react-icons/lu';
 import { BsCalendar3, BsSliders } from 'react-icons/bs';
 import { CiGrid31 } from 'react-icons/ci';
 import { ImOffice } from 'react-icons/im';
@@ -66,10 +84,13 @@ import { GoLink, GoZap } from 'react-icons/go';
 import { BiWorld } from 'react-icons/bi';
 import { FiMinus, FiTarget } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { IoTicket } from 'react-icons/io5';
+import { MdOutlineQueryStats } from 'react-icons/md';
+import { IoStatsChartSharp } from 'react-icons/io5';
 
 export const Icons = {
   MapPin: CiMapPin,
+  Map: CiMap,
   Mail: HiOutlineMail,
   User: CiUser,
   Close: IoIosClose,
@@ -87,6 +108,7 @@ export const Icons = {
   Paper: IoDocumentTextOutline,
   Copy: IoCopyOutline,
   Download: IoDownloadOutline,
+  DownloadPaper: TbFileDownload,
   Key: IoKeyOutline,
   Share: IoShareOutline,
   Edit: MdEdit,
@@ -147,4 +169,19 @@ export const Icons = {
   Link: GoLink,
   Desktop: CiDesktop,
   Minus: FiMinus,
+  SendMail: RiMailSendLine,
+  Lock: IoLockClosed,
+  Megaphone: HiMiniMegaphone,
+  Wallet: MdWallet,
+  Assignment: MdAssignmentInd,
+  Agenda: FaBook,
+  ChevronLeft: HiMiniChevronLeft,
+  ChevronRight: HiMiniChevronRight,
+  Ticket: IoTicket,
+  QueryStats: MdOutlineQueryStats,
+  StatsChart: IoStatsChartSharp,
+  FingerPrint: IoMdFingerPrint,
+  LuFiles,
+  LuFileImage,
+  LuFile,
 };
