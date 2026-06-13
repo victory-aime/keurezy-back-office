@@ -21,8 +21,8 @@ export const SidebarInset: FC<SidebarInsetProps> = React.forwardRef(
         minH="100svh"
         ml={{
           base: 0,
-          md: collapsed ? '80px' : '220px',
-          lg: collapsed ? '80px' : '230px',
+          md: collapsed ? '80px' : '250px',
+          lg: collapsed ? '80px' : '250px',
         }}
         transition="margin 0.2s ease"
         {...(isInset && {})}

@@ -26,9 +26,9 @@ export const SessionSection = ({ data }: { data: MODELS.IUserInfoResponse | unde
             key={idx}
             p={3}
             border="1px solid"
-            borderColor="gray.200"
+            borderColor="inherit"
             borderRadius="lg"
-            _hover={{ borderColor: 'gray.300' }}
+            _hover={{ borderColor: 'indigo' }}
           >
             <BaseText fontWeight="bold">{parseUserAgent(session?.userAgent)}</BaseText>
 
@@ -51,7 +51,7 @@ export const SessionSection = ({ data }: { data: MODELS.IUserInfoResponse | unde
           </Box>
         ))
       ) : (
-        <Box p={4} border="1px dashed" borderColor="gray.300" borderRadius="lg" textAlign="center">
+        <Box p={4} border="1px dashed" borderColor="inherit" borderRadius="lg" textAlign="center">
           <BaseText color="gray.400">Aucune session enregistrée</BaseText>
         </Box>
       )}

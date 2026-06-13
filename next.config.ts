@@ -1,6 +1,13 @@
 import type { NextConfig } from 'next';
 import CopyPlugin from 'copy-webpack-plugin';
 
+const apiUrl = process.env.API_BACKEND_URL;
+const backend_path = process.env.NEXT_PUBLIC_BACKEND_PATH;
+
+if (!apiUrl || !backend_path) {
+  throw new Error('API_BACKEND_URL and NEXT_PUBLIC_BACKEND_PATH are missing');
+}
+
 const nextConfig: NextConfig = {
   webpack: (config) => {
     config.plugins.push(
@@ -23,7 +30,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/v1/:path*',
-        destination: `${process.env.API_BACKEND_URL}/api/v1/:path*`,
+        destination: `${apiUrl}/api/v1/:path*`,
       },
     ];
   },
@@ -44,11 +51,21 @@ const nextConfig: NextConfig = {
         hostname: 'avatar.iran.liara.run',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
     ],
   },
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
+  },
+  env: {
+    NEXT_PUBLIC_BACKEND_PATH: process.env.NEXT_PUBLIC_BACKEND_PATH,
+    API_BACKEND_URL: process.env.API_BACKEND_URL,
+    NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
   },
 };
 

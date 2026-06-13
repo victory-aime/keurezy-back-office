@@ -1,5 +1,5 @@
 import { DialogRootProps } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { variantColorType } from '_components/custom';
 import { ENUM } from '_types/*';
 
@@ -33,6 +33,10 @@ interface ModalProps extends DialogRootProps {
   children: ReactNode;
   animateConfetti?: boolean;
   ref?: React.Ref<HTMLDivElement> | undefined;
+  showEditButton?: boolean;
+  showDeleteButton?: boolean;
+  onDelete?: () => void;
+  onEdit?: () => void;
 }
 
 interface ModalOpenProps {
@@ -49,6 +53,8 @@ interface DeleteModalActions extends ModalOpenProps {
   title: string;
   children: React.ReactNode;
   ignoreFooter?: boolean;
+  buttonSaveTitle?: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'cover' | 'full' | undefined;
 }
 
 export type { DeleteModalActions, ModalProps, ModalOpenProps };

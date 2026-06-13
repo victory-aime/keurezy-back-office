@@ -60,7 +60,7 @@ export const UsersList = () => {
       cell: (role: 'OWNER' | 'CLIENT') => (
         <BaseTag
           color={role === 'OWNER' ? 'blue' : 'orange'}
-          label={role === 'OWNER' ? 'Agence' : 'Utilisateur'}
+          label={role === 'OWNER' ? "Chef d'agence" : 'Utilisateur'}
         />
       ),
     },
@@ -69,26 +69,7 @@ export const UsersList = () => {
       accessor: 'status',
       cell: (status) => <BaseTag status={status} />,
     },
-    {
-      header: 'Email',
-      accessor: 'emailVerified',
-      cell: (value) =>
-        value ? (
-          <Icons.CircleCheck color={VariablesColors.success} size={18} />
-        ) : (
-          <Icons.CircleClose color={VariablesColors.danger} size={18} />
-        ),
-    },
-    {
-      header: '2FA',
-      accessor: 'twoFactorEnabled',
-      cell: (value: boolean) =>
-        value ? (
-          <Icons.CircleCheck color={VariablesColors.success} size={18} />
-        ) : (
-          <Icons.CircleClose color={VariablesColors.danger} size={18} />
-        ),
-    },
+
     {
       header: 'Créé le',
       accessor: 'createdAt',

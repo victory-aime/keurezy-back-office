@@ -1,3 +1,3 @@
 export * as COMMON from './common';
-export * from './role';
 export * from './packs';
+export * from './type';

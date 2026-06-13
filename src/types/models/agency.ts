@@ -1,19 +1,8 @@
-import { COMMON } from '../enum';
-interface ICreateAgency {
-  name?: string;
-  address?: string;
-  description?: string;
-  phone?: string;
-  userId?: string;
-  acceptTerms?: boolean;
-  documents?: File[];
-}
+import { COMMON, PricingType, PlanType, PlanCategory, BillingCycle } from '../enum';
 
-interface IUpdateAgency extends ICreateAgency {
+interface IUpdateAgency {
   agencyId?: string;
-}
-interface ICloseAgency extends IUpdateAgency {
-  ownerId: string;
+  status: COMMON.Status;
 }
 
 interface IAgency {
@@ -22,32 +11,83 @@ interface IAgency {
   ownerId: string;
   description: string;
   address: string;
+  email: string;
   phone: string;
   status: COMMON.Status;
-  isApprove: boolean;
+  acceptTerms: true;
+  isVerified: false;
+  createdAt: string;
+  updatedAt: string;
   agencyLogo?: string;
   documents: string[];
 }
 
-interface IAgencyFilters {
+interface IAgencySubscription {
+  id: string;
   agencyId: string;
-  ownerId: string;
-  initialPage: number;
-  limitPerPage: number;
+  planId: string;
+  status: COMMON.Status;
+  pricingType: PricingType;
+  billingCycle: BillingCycle;
+  price?: string;
+  currency: COMMON.Currency;
+  commissionRate: string;
+  currentPeriodStart?: string;
+  currentPeriodEnd?: string;
+  cancelAtPeriodEnd?: boolean;
+  canceledAt?: string;
+  createdAt: string;
+  updatedAt: string;
+  plan: {
+    id: string;
+    name: PlanType;
+    pricingType: PricingType;
+    popular: false;
+    commissionRate: string;
+    planCategory: PlanCategory;
+    isActive: true;
+    createdAt: string;
+  };
 }
 
-interface IAgencyCommonParams {
-  agencyId: string;
-  ownerId: string;
-  requestId?: string;
-  propertyId?: string;
+interface IAgencyListResponse extends IAgency {
+  owner: {
+    id: string;
+    userId: string;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      createdAt: string;
+    };
+  };
+  subscriptions: IAgencySubscription[];
+}
+
+interface IAgencyDetailsResponse extends IAgency, IAgencyListResponse {
+  staff: { id: string }[];
+  stats: {
+    staff: number;
+    properties: number;
+    batiments: number;
+    villas: number;
+    lands: number;
+    leads: number;
+    visits: number;
+    tenants: number;
+    contracts: number;
+    transactions: number;
+    transactionCommissions: number;
+    tickets: number;
+    reports: number;
+    invitations: number;
+  };
 }
 
 export type {
-  ICreateAgency,
   IUpdateAgency,
-  ICloseAgency,
   IAgency,
-  IAgencyFilters,
-  IAgencyCommonParams,
+  IAgencyListResponse,
+  IAgencyDetailsResponse,
+  IAgencySubscription,
 };
