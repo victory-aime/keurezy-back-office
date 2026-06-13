@@ -1,9 +1,9 @@
 import { ApiActionProps, APIObjectType, createApiAction } from 'rise-core-frontend';
 
 const APIS_ROUTES_MODULES_PATH = {
-  USER: '/users',
+  USER: '/admin/users',
   PACKS: '/packs',
-  AGENCY: '/agency',
+  AGENCY: '/admin/agencies',
 };
 
 export const APIS = (baseUrl?: string) => {
@@ -20,7 +20,7 @@ export const APIS = (baseUrl?: string) => {
         handleErrorManually: false,
       }),
       ALL_USERS: api({
-        path: `${APIS_ROUTES_MODULES_PATH.USER}/get-allUsers`,
+        path: `${APIS_ROUTES_MODULES_PATH.USER}`,
         method: 'GET',
         pathBase: 'SECURED_API',
         showResponse: false,
@@ -30,6 +30,11 @@ export const APIS = (baseUrl?: string) => {
         method: 'GET',
         pathBase: 'SECURED_API',
         showResponse: false,
+      }),
+      UPDATE_USER: api({
+        path: `${APIS_ROUTES_MODULES_PATH.USER}/status`,
+        method: 'PATCH',
+        pathBase: 'SECURED_API',
       }),
     },
     PACKS: {
@@ -53,35 +58,22 @@ export const APIS = (baseUrl?: string) => {
       }),
     },
     AGENCY: {
-      CREATE_AGENCY: api({
-        path: `${APIS_ROUTES_MODULES_PATH.AGENCY}/create`,
-        method: 'POST',
-        pathBase: 'SECURED_API',
-        showResponse: false,
-      }),
-      AGENCY_INFO: api({
+      LIST: api({
         path: `${APIS_ROUTES_MODULES_PATH.AGENCY}`,
         method: 'GET',
         pathBase: 'SECURED_API',
         showResponse: false,
       }),
+      AGENCY_INFO: api({
+        path: `${APIS_ROUTES_MODULES_PATH.AGENCY}/detail`,
+        method: 'GET',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
       UPDATE_AGENCY: api({
-        path: `${APIS_ROUTES_MODULES_PATH.AGENCY}/update`,
-        method: 'POST',
+        path: `${APIS_ROUTES_MODULES_PATH.AGENCY}/update-status`,
+        method: 'PATCH',
         pathBase: 'SECURED_API',
-      }),
-      CLOSE_AGENCY: api({
-        path: `${APIS_ROUTES_MODULES_PATH.AGENCY}/close`,
-        method: 'POST',
-        pathBase: 'SECURED_API',
-        showResponse: false,
-      }),
-      CHECK_NAME: api({
-        path: `${APIS_ROUTES_MODULES_PATH.AGENCY}/verified-name`,
-        method: 'POST',
-        pathBase: 'UNSECURED_API',
-        showResponse: false,
-        handleErrorManually: false,
       }),
     },
   };

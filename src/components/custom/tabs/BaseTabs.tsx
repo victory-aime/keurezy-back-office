@@ -1,23 +1,25 @@
 'use client';
-import { Tabs } from '@chakra-ui/react';
+import { Badge, Flex, Tabs, useBreakpointValue } from '@chakra-ui/react';
 import { TabsProps } from './interface/tabs';
 import { useState } from 'react';
-import { hexToRGB } from '_theme/colors';
 import { BaseContainer } from '../container';
 import { NoDataAnimation } from '../data-table/NoDataAnimation';
-import { useColorMode } from '_components/ui/color-mode';
+import { useThemeColors } from '_theme/useThemeColors';
+import { BaseText } from '_components/custom';
 
 export const BaseTabs = ({
   items,
-  redirectLink,
-  isMobile,
   title = '',
   description = '',
   withActionButtons = false,
   actionsButtonProps,
   ...rest
 }: TabsProps) => {
-  const { colorMode } = useColorMode();
+  const { hexToRGB } = useThemeColors();
+  const orientation = useBreakpointValue<'horizontal' | 'vertical'>({
+    base: 'horizontal',
+    sm: 'vertical',
+  });
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   return (
@@ -33,6 +35,7 @@ export const BaseTabs = ({
         defaultValue={items[currentIndex]?.label}
         variant={'enclosed'}
         value={items[currentIndex]?.label}
+        orientation={orientation}
         onValueChange={({ value }: { value: string }) => {
           const index = items?.findIndex((item: { label: string }) => item?.label === value);
           setCurrentIndex(index);
@@ -41,31 +44,39 @@ export const BaseTabs = ({
       >
         <Tabs.List mt={{ base: 0, sm: 5 }}>
           {items.map((item, index) => (
-            <Tabs.Trigger
-              color={currentIndex === index ? 'primary.500' : 'gray.400'}
-              bgColor={
-                currentIndex === index
-                  ? colorMode === 'light'
-                    ? 'white'
-                    : hexToRGB('primary', 0.1)
-                  : 'none'
-              }
-              key={index}
-              value={item.label}
-              p={5}
-              width={'fit-content'}
-            >
-              {item?.icon}
-              {item.label}
-            </Tabs.Trigger>
+            <Flex key={index}>
+              <Tabs.Trigger
+                color={currentIndex === index ? 'primary.500' : 'gray.400'}
+                key={index}
+                value={item.label}
+                asChild
+              >
+                <Flex alignItems={'center'}>
+                  {item.icon}
+                  <BaseText>{item.label}</BaseText>
+                  {item.totalItems && (
+                    <Badge
+                      ml={1}
+                      colorPalette="blue"
+                      variant="subtle"
+                      borderRadius="full"
+                      fontSize="xs"
+                    >
+                      {item.totalItems}
+                    </Badge>
+                  )}
+                </Flex>
+              </Tabs.Trigger>
+            </Flex>
           ))}
-          <Tabs.Indicator rounded="l2" bgColor={hexToRGB('primary', 0.1)} />
+          <Tabs.Indicator rounded="sm" bgColor={hexToRGB(500, 0.2)} />
         </Tabs.List>
         {items?.map((item, index) => (
           <Tabs.Content
             key={index}
             value={item.label}
             mt={{ base: rest.mt ?? 2, sm: rest.mt ?? 4 }}
+            width={'full'}
             _open={{
               animationName: 'fade-in, scale-in',
               animationDuration: '300ms',

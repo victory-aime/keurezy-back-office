@@ -28,12 +28,12 @@ export const Header = ({ onShowSidebar, sideToggled }: SideBarProps) => {
   const links = [
     {
       label: 'Profile',
-      path: BO_ROUTES.ROOT,
+      path: BO_ROUTES.DASHBOARD,
       icon: Icons.User,
     },
     {
       label: 'Paramètres',
-      path: BO_ROUTES.ROOT,
+      path: BO_ROUTES.DASHBOARD,
       icon: Icons.Setting,
     },
   ];

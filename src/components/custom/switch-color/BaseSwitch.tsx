@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Switch } from '@chakra-ui/react';
-import { Loader } from '_components/custom';
+import { Spinner, Switch } from '@chakra-ui/react';
 
 interface BaseSwitchProps {
   hideIcon?: boolean;
@@ -21,12 +20,12 @@ export const BaseSwitch: FC<BaseSwitchProps> = ({
     <Switch.Root
       checked={isChecked}
       onCheckedChange={(value) => onSwitchChange(value.checked)}
-      colorPalette={'purple'}
+      colorPalette={isChecked ? 'teal' : 'red'}
       size={'md'}
       disabled={isDisabled}
     >
       {isLoading ? (
-        <Loader loader={isLoading} />
+        <Spinner color="primary.500" animationDuration="0.4s" size={'sm'} />
       ) : (
         <>
           <Switch.HiddenInput />

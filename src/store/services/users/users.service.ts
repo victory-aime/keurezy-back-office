@@ -24,4 +24,9 @@ export class UserService extends BaseApi {
       { params },
     );
   }
+  update_user(data: MODELS.IUser, id: string) {
+    return this.apiService.invoke(this.applicationContext.getApiConfig().USER.UPDATE_USER, data, {
+      params: { id },
+    });
+  }
 }

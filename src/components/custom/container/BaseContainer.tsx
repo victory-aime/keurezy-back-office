@@ -1,13 +1,18 @@
 import { Box, Flex, HStack, Stack, VStack, FlexProps } from '@chakra-ui/react';
 import { boxStyle } from './style';
-import { BaseText, TextVariant } from '../base-text';
+import { BaseText, TextVariant, TextWeight } from '../base-text';
 import { ActionsButton } from '../button';
-import { BaseIcon, BaseTooltip, CustomSkeletonLoader, IBoxProps } from '_components/custom';
-import { hexToRGB } from '_theme/colors';
+import { BaseIcon, BaseTooltip, CustomSkeletonLoader, IBoxProps, Icons } from '_components/custom';
 import { useTranslation } from 'react-i18next';
-import { VariablesColors } from '_theme/variables';
 import { LuInfo } from 'react-icons/lu';
 import React from 'react';
+import { useThemeColors } from '_theme/useThemeColors';
+import { useAppTheme } from '_context/theme-context';
+import { useRouter } from 'next/navigation';
+
+export type BaseContainerProps = IBoxProps & {
+  flexProps?: FlexProps;
+};
 
 export const BaseContainer = React.memo(
   ({
@@ -27,9 +32,13 @@ export const BaseContainer = React.memo(
     textVariant,
     iconColor = 'success',
     icon,
+    flexProps,
     ...rest
-  }: IBoxProps & FlexProps) => {
+  }: BaseContainerProps) => {
+    const { hexToRGB } = useThemeColors();
+    const { vars } = useAppTheme();
     const { t } = useTranslation();
+    const router = useRouter();
 
     if (withActionButtons && !actionsButtonProps) {
       throw new Error('Lorsque vous utiliser withActionButtons, actionsButtonProps est requis');
@@ -46,11 +55,12 @@ export const BaseContainer = React.memo(
       <Box {...boxStyle} {...rest}>
         <Flex
           width={'full'}
-          flexDir={{ base: 'column', md: 'row' }}
+          flexDir={{ base: 'column', sm: 'row' }}
+          alignItems={'flex-start'}
           justifyContent={'space-between'}
           gap={5}
         >
-          <Stack gap={0} width={'full'}>
+          <Stack gap={1.5} width={'full'}>
             {loader ? (
               <CustomSkeletonLoader type="TEXT" width={rest?.width} numberOfLines={numberOfLines} />
             ) : (
@@ -59,7 +69,7 @@ export const BaseContainer = React.memo(
                   <Flex width={'full'} gap={4} alignItems={'center'} justifyContent={'flex-start'}>
                     {icon ? (
                       <Flex gap={3} alignItems={'center'}>
-                        <BaseIcon boxSize={'10px'} color={hexToRGB(iconColor, 0.8)}>
+                        <BaseIcon boxSize={'10px'} color={hexToRGB(500, 0.8)}>
                           {icon}
                         </BaseIcon>
                         <BaseText variant={textVariant ?? TextVariant.L}>{t(title)}</BaseText>
@@ -72,7 +82,7 @@ export const BaseContainer = React.memo(
 
                     {tooltip && (
                       <BaseTooltip message={tooltip}>
-                        <LuInfo size={14} color={VariablesColors.primary} />
+                        <LuInfo size={14} color={vars.primary} />
                       </BaseTooltip>
                     )}
                   </Flex>
@@ -80,7 +90,7 @@ export const BaseContainer = React.memo(
                   <>
                     {icon ? (
                       <Flex gap={3} alignItems={'center'}>
-                        <BaseIcon color={hexToRGB(iconColor, 0.8)}>{icon}</BaseIcon>
+                        <BaseIcon color={`${iconColor}.500`}>{icon}</BaseIcon>
                         <BaseText variant={textVariant ?? TextVariant.H3}>{t(title)}</BaseText>
                       </Flex>
                     ) : (
@@ -106,13 +116,7 @@ export const BaseContainer = React.memo(
           {loader && withActionButtons ? (
             <CustomSkeletonLoader type={'BUTTON'} width={'100px'} colorButton={'primary'} />
           ) : (
-            <HStack
-              gap={4}
-              width={'full'}
-              alignItems={'flex-start'}
-              justifyContent={'flex-end'}
-              mt={{ base: '30px', md: '0' }}
-            >
+            <HStack gap={4} alignItems={'flex-start'} justifyContent={'flex-end'}>
               {isForm && formComponent}
               {withActionButtons && <ActionsButton {...mergedActionsButtonProps} />}
             </HStack>
@@ -122,15 +126,17 @@ export const BaseContainer = React.memo(
           <Box
             mt={'20px'}
             mb={'30px'}
-            bgColor={hexToRGB('lighter', 0.1)}
-            p={15}
+            p={5}
+            boxShadow={'md'}
             borderRadius={'7px'}
             animation={'slideIn'}
           >
             {filterComponent}
           </Box>
         )}
-        <VStack gap={rest.gap}>{children}</VStack>
+        <VStack gap={flexProps?.gap} width={flexProps?.width}>
+          {children}
+        </VStack>
       </Box>
     );
   },

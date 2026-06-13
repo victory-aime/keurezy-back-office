@@ -6,7 +6,7 @@ import { MobileSidebar } from './components/MobileSidebar';
 import { ASSETS } from '_assets/images';
 import Image from 'next/image';
 import { SideBarProps } from './types';
-import { UserModule } from '_store/state-management';
+import { UserModule, AgencyModule } from '_store/state-management';
 import { BO_SIDE_ROUTES } from './routes/routes';
 import { RenderGroupedLinks } from './components/RenderGroupedLinks';
 import { useAuth } from '_hooks/useAuth';
@@ -32,11 +32,14 @@ export const Sidebar = ({ onShowSidebar, sideToggled }: SideBarProps) => {
     },
   });
 
+  const { data: allAgencies } = AgencyModule.allAgenciesListQueries({});
+
   const badgesByPath = useMemo(() => {
     return {
       [BO_ROUTES.USERS.LIST]: allUsers?.totalItems,
+      [BO_ROUTES.AGENCIES.LIST]: allAgencies?.length,
     };
-  }, [allUsers?.totalItems]);
+  }, [allUsers?.totalItems, allAgencies]);
 
   const sidebarLinks = useMemo(() => {
     return BO_SIDE_ROUTES.map((group) => ({
@@ -65,7 +68,7 @@ export const Sidebar = ({ onShowSidebar, sideToggled }: SideBarProps) => {
         />
       ) : (
         <Box
-          w={!sideToggled ? '80px' : '230px'}
+          w={!sideToggled ? '80px' : '250px'}
           h="100vh"
           position="fixed"
           transition="width 0.35s cubic-bezier(0.25, 0.1, 0.25, 1)"
