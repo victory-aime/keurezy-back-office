@@ -2,8 +2,9 @@ import { ApiActionProps, APIObjectType, createApiAction } from 'rise-core-fronte
 
 const APIS_ROUTES_MODULES_PATH = {
   USER: '/admin/users',
-  PACKS: '/packs',
+  PACKS: '/admin/packs',
   AGENCY: '/admin/agencies',
+  PLANS: '/admin/plans',
 };
 
 export const APIS = (baseUrl?: string) => {
@@ -37,6 +38,7 @@ export const APIS = (baseUrl?: string) => {
         pathBase: 'SECURED_API',
       }),
     },
+
     PACKS: {
       GET_ALL_PACKS: api({
         path: `${APIS_ROUTES_MODULES_PATH.PACKS}/get-all-packs`,
@@ -57,6 +59,46 @@ export const APIS = (baseUrl?: string) => {
         showResponse: false,
       }),
     },
+
+    PLANS: {
+      LIST: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PLANS}`,
+        method: 'GET',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      DETAIL: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PLANS}/detail`,
+        method: 'GET',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      CREATE: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PLANS}/create`,
+        method: 'POST',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      UPDATE_PLAN: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PLANS}/update-plan`,
+        method: 'PATCH',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      TOGGLE_STATUS: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PLANS}/toggle-status`,
+        method: 'PATCH',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      DELETE: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PLANS}/delete`,
+        method: 'DELETE',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+    },
+
     AGENCY: {
       LIST: api({
         path: `${APIS_ROUTES_MODULES_PATH.AGENCY}`,
