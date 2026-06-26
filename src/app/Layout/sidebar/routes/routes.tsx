@@ -28,6 +28,11 @@ export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
         path: BO_ROUTES.PACKS.LIST,
         icon: Icons.Paper,
       },
+      {
+        label: 'Plans',
+        path: BO_ROUTES.PLANS.LIST,
+        icon: Icons.List,
+      },
     ],
   },
 ];
