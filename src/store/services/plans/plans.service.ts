@@ -6,16 +6,12 @@ import { MODELS } from '_types/index';
  * (récupération, création, mise à jour, activation/désactivation, suppression).
  */
 export class PlansService extends BaseApi {
-  plan_info(id: string) {
+  all_plans(id?: string) {
     return this.apiService.invoke(
-      this.applicationContext.getApiConfig().PLANS.DETAIL,
+      this.applicationContext.getApiConfig().PLANS.LIST,
       {},
       { params: { id } },
     );
-  }
-
-  all_plans() {
-    return this.apiService.invoke(this.applicationContext.getApiConfig().PLANS.LIST);
   }
 
   create_plan(data: MODELS.ICreatePlan) {

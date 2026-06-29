@@ -20,7 +20,7 @@ export default function RedirectAfterLogin() {
       return () => clearTimeout(timer);
     }
     const dashboardUrl = roleToDashboardMap[session.user.role];
-    window.location.href = dashboardUrl ?? APP_ROUTES.ROOT;
+    window.location.href = dashboardUrl ?? APP_ROUTES.SIGN_IN;
   }, [session, isPending]);
 
   return <KeurezyLogoAnimation isExiting={!isPending} onAnimationComplete={() => {}} />;
