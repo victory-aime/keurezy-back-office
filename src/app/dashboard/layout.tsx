@@ -4,7 +4,6 @@ import { safeGetServerSession } from '@/app/hooks';
 import { headers } from 'next/headers';
 import { SessionRefreshProvider } from '_context/SessionRefresh-context';
 import { UserProvider } from '_context/user-context';
-import { DynamicThemeProvider } from '_context/theme-context';
 import { Layout } from '@/app/Layout/Layout';
 
 const geistSans = Geist({
@@ -28,17 +27,13 @@ export default async function RootLayout({
     },
   });
 
-  console.log('DashboardLayout', session);
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AuthContextProvider session={session?.data}>
           <SessionRefreshProvider error={session?.error?.toString()}>
             <UserProvider userId={session?.data?.user?.id}>
-              <DynamicThemeProvider>
-                <Layout>{children}</Layout>
-              </DynamicThemeProvider>
+              <Layout>{children}</Layout>
             </UserProvider>
           </SessionRefreshProvider>
         </AuthContextProvider>

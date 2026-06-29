@@ -14,7 +14,7 @@ export const APIS = (baseUrl?: string) => {
   return {
     USER: {
       INFO: api({
-        path: `${APIS_ROUTES_MODULES_PATH.USER}/info`,
+        path: `/users/info`,
         method: 'GET',
         pathBase: 'SECURED_API',
         showResponse: false,

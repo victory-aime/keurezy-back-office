@@ -3,14 +3,7 @@
 import { Box, Flex, Text, Icon } from '@chakra-ui/react';
 import { LuCreditCard, LuCalendar, LuPercent } from 'react-icons/lu';
 import { formatDisplayDate } from 'rise-core-frontend';
-import {
-  BaseFormatNumber,
-  BaseTag,
-  BaseText,
-  CustomSkeletonLoader,
-  DataTableContainer,
-  Icons,
-} from '_components/custom';
+import { BaseFormatNumber, BaseTag, BaseText, DataTableContainer, Icons } from '_components/custom';
 import { EmptyBlock } from '@/app/components/EmptyBlock';
 import { useTranslation } from 'react-i18next';
 import { MODELS } from '_types/';
@@ -102,7 +95,7 @@ export const AgencySubscriptionsTab = ({
           </Box>
         ))}
 
-      {subscriptions?.length > 1 && (
+      {subscriptions?.length > 0 && (
         <DataTableContainer
           data={subscriptions}
           columns={[
@@ -141,9 +134,31 @@ export const AgencySubscriptionsTab = ({
               cell: (status) => <BaseTag status={status} />,
             },
             {
-              header: 'Souscrit le',
-              accessor: 'createdAt',
-              cell: (date) => <BaseText>{formatDisplayDate(date)}</BaseText>,
+              header: 'Début',
+              accessor: 'currentPeriodStart',
+              cell: (currentPeriodStart) => (
+                <BaseText color={'primary.600'}>
+                  {formatDisplayDate(currentPeriodStart) ?? 'Aucune Date'}
+                </BaseText>
+              ),
+            },
+            {
+              header: 'Fin',
+              accessor: 'currentPeriodEnd',
+              cell: (currentPeriodEnd) => (
+                <BaseText color={'red.600'}>
+                  {formatDisplayDate(currentPeriodEnd) ?? 'Aucune Date'}
+                </BaseText>
+              ),
+            },
+            {
+              header: 'annulation',
+              accessor: 'canceledAt',
+              cell: (canceledAt) => (
+                <BaseText color={'info.500'}>
+                  {formatDisplayDate(canceledAt) ?? 'Aucune Date'}
+                </BaseText>
+              ),
             },
           ]}
           hidePagination

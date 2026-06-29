@@ -2,9 +2,8 @@ import type { NextConfig } from 'next';
 import CopyPlugin from 'copy-webpack-plugin';
 
 const apiUrl = process.env.API_BACKEND_URL;
-const backend_path = process.env.NEXT_PUBLIC_BACKEND_PATH;
 
-if (!apiUrl || !backend_path) {
+if (!apiUrl) {
   throw new Error('API_BACKEND_URL and NEXT_PUBLIC_BACKEND_PATH are missing');
 }
 
@@ -63,7 +62,6 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   env: {
-    NEXT_PUBLIC_BACKEND_PATH: process.env.NEXT_PUBLIC_BACKEND_PATH,
     API_BACKEND_URL: process.env.API_BACKEND_URL,
     NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
   },

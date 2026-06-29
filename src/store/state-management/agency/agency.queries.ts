@@ -3,11 +3,13 @@ import { agencyServiceInstance } from './agency.service-instance';
 import { MODELS } from '_types/index';
 import { QUERIES } from 'rise-core-frontend';
 
-const getAgencyInfo = (args: QUERIES.QueryPayload<{ id: string }>) => {
+const getAgencyInfo = (
+  args: QUERIES.QueryPayload<MODELS.IAgencyDetailsResponse, undefined, { id: string }>,
+) => {
   const { params, queryOptions } = args;
-  return QUERIES.useCustomQuery<MODELS.IAgencyDetailsResponse>({
+  return QUERIES.useCustomQuery<{ id: string }, undefined, MODELS.IAgencyDetailsResponse>({
     queryKey: [Constants.AGENCY_KEYS.AGENCY_INFO, params],
-    queryFn: () => agencyServiceInstance().agency_info(params?.id),
+    queryFn: () => agencyServiceInstance().agency_info(params?.id!),
     options: queryOptions,
   });
 };

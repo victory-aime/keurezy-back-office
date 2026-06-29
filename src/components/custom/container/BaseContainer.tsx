@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { LuInfo } from 'react-icons/lu';
 import React from 'react';
 import { useThemeColors } from '_theme/useThemeColors';
-import { useAppTheme } from '_context/theme-context';
 import { useRouter } from 'next/navigation';
+import { VariablesColors } from '_theme/variables';
 
 export type BaseContainerProps = IBoxProps & {
   flexProps?: FlexProps;
@@ -36,7 +36,6 @@ export const BaseContainer = React.memo(
     ...rest
   }: BaseContainerProps) => {
     const { hexToRGB } = useThemeColors();
-    const { vars } = useAppTheme();
     const { t } = useTranslation();
     const router = useRouter();
 
@@ -82,7 +81,7 @@ export const BaseContainer = React.memo(
 
                     {tooltip && (
                       <BaseTooltip message={tooltip}>
-                        <LuInfo size={14} color={vars.primary} />
+                        <LuInfo size={14} color={VariablesColors.primary} />
                       </BaseTooltip>
                     )}
                   </Flex>

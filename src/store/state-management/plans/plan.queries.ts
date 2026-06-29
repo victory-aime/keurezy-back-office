@@ -3,20 +3,14 @@ import { planServiceInstance } from './plan.service-instance';
 import { MODELS } from '_types/index';
 import { QUERIES } from 'rise-core-frontend';
 
-const getPlanInfo = (args: QUERIES.QueryPayload<{ id: string }>) => {
-  const { params, queryOptions } = args;
-  return QUERIES.useCustomQuery<MODELS.IPlanDetailsResponse>({
-    queryKey: [Constants.PLAN_KEYS.PLAN_INFO, params],
-    queryFn: () => planServiceInstance().plan_info(params?.id!),
+const allPlansListQueries = (
+  args: QUERIES.QueryPayload<MODELS.IPlan[], undefined, { id?: string }>,
+) => {
+  const { queryOptions, params } = args;
+  return QUERIES.useCustomQuery<{ id?: string }, undefined, MODELS.IPlan[]>({
+    queryKey: [Constants.PLAN_KEYS.PLANS_LIST, params],
+    queryFn: () => planServiceInstance().all_plans(params?.id),
     options: queryOptions,
-  });
-};
-
-const allPlansListQueries = (args: QUERIES.QueryPayload<any>) => {
-  return QUERIES.useCustomQuery<MODELS.IPlanListResponse[]>({
-    queryKey: [Constants.PLAN_KEYS.PLANS_LIST],
-    queryFn: () => planServiceInstance().all_plans(),
-    options: args.queryOptions,
   });
 };
 
@@ -55,7 +49,6 @@ const deletePlanMutation = (args: QUERIES.MutationPayload<any, any, { id: string
 };
 
 export {
-  getPlanInfo,
   allPlansListQueries,
   createPlanMutation,
   updatePlanMutation,
