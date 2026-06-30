@@ -1,4 +1,5 @@
 'use client';
+
 import {
   BaseContainer,
   BaseFormatNumber,
@@ -19,13 +20,23 @@ export const PlansList = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [openForm, setOpenForm] = useState<boolean>(false);
-  const [selectedValues, setSelectedValues] = useState<MODELS.IPlan>({} as MODELS.IPlan);
+  const [selectedValues, setSelectedValues] = useState<MODELS.IPlan | null>(null);
 
   const { data: allPlans, isFetching, refetch } = PlanModule.allPlansListQueries({});
   const { mutateAsync: togglePlanStatus, isPending } = PlanModule.togglePlanMutation({
     mutationOptions: {
       onSuccess: async () => {
         PlanModule.PlansCache.invalidateAllPlansCache();
+      },
+    },
+  });
+
+  const { mutateAsync: updatePlan, isPending: updatePending } = PlanModule.updatePlanMutation({
+    mutationOptions: {
+      onSuccess: async () => {
+        PlanModule.PlansCache.invalidateAllPlansCache();
+        setOpenForm(false);
+        setSelectedValues(null);
       },
     },
   });
@@ -109,6 +120,20 @@ export const PlansList = () => {
     },
   ];
 
+  const handleUpdatePlan = async (values: MODELS.ICreatePlan) => {
+    if (selectedValues?.id) {
+      await updatePlan({
+        payload: {
+          name: selectedValues.name,
+          isActive: true,
+          features: [],
+          pricing: values?.pricing,
+        },
+        params: { id: selectedValues?.id },
+      });
+    }
+  };
+
   return (
     <BaseContainer
       title={'Liste des plans'}
@@ -118,7 +143,10 @@ export const PlansList = () => {
       withActionButtons
       actionsButtonProps={{
         validateTitle: 'Ajouter un plan',
-        onClick: () => setOpenForm(true),
+        onClick: () => {
+          setOpenForm(true);
+          setSelectedValues({} as MODELS.IPlan);
+        },
         onReload: async () => {
           await refetch();
         },
@@ -130,7 +158,13 @@ export const PlansList = () => {
         isLoading={isFetching}
         hidePagination
       />
-      <PlanForm data={selectedValues} onChange={setOpenForm} isOpen={undefined} />
+      <PlanForm
+        data={selectedValues}
+        onChange={() => setOpenForm(false)}
+        isOpen={openForm}
+        isLoading={updatePending}
+        callback={handleUpdatePlan}
+      />
     </BaseContainer>
   );
 };

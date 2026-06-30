@@ -1,19 +1,17 @@
 'use client';
 
 import { Box, Flex } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
 import { PlanModule } from '_store/state-management';
-import { BaseButton, BaseContainer, BaseTabs, BaseTag, BaseText } from '_components/custom';
+import { BaseContainer, BaseTabs, BaseTag, BaseText } from '_components/custom';
 import { Status } from '@/types/enum/common';
 import { IsDetailsDataLoad } from '@/app/components/DetailsLoad';
-import { BO_ROUTES } from '@/app/routes';
 import { useTranslation } from 'react-i18next';
 import { PlanInfoTab } from './PlanInfoTab';
 import { PlanSubscriptionTab } from './PlanSubscriptionTab';
+import React from 'react';
 
 export const PlansDetails = ({ id }: { id: string }) => {
   const { t } = useTranslation();
-  const router = useRouter();
 
   const { data, isFetching } = PlanModule.allPlansListQueries({
     params: { id },
@@ -28,28 +26,19 @@ export const PlansDetails = ({ id }: { id: string }) => {
       {isFetching ? (
         <IsDetailsDataLoad />
       ) : (
-        <>
-          <Flex align={{ base: 'flex-start', sm: 'center' }} justify="space-between" width="100%">
-            <Flex align="center" gap={4} flex={1}>
-              <Box>
-                <Flex align="center" gap={2} mb={1} flexWrap="wrap">
-                  <BaseText fontSize="xl" fontWeight="600" textTransform={'uppercase'}>
-                    {t(`SUBSCRIPTION.PLANS.${planInfo?.name}`)}
-                  </BaseText>
-                  <BaseTag status={isActive ? Status.ACTIVE : Status.INACTIVE} />
-                </Flex>
-                <BaseText fontSize="sm" color="gray.500">
-                  {t(`SUBSCRIPTION.PLAN_CATEGORY.${planInfo?.planCategory}`)}
+        <React.Fragment>
+          <Flex align={{ base: 'flex-start', sm: 'center' }} justify="flex-start" width="100%">
+            <Box>
+              <Flex align="center" gap={2} mb={1} flexWrap="wrap">
+                <BaseText fontSize="xl" fontWeight="600" textTransform={'uppercase'}>
+                  {t(`SUBSCRIPTION.PLANS.${planInfo?.name}`)}
                 </BaseText>
-              </Box>
-            </Flex>
-            <BaseButton
-              variant={'outline'}
-              colorType={'primary'}
-              onClick={() => router.push(`${BO_ROUTES.PLANS.UPDATE}?id=${id}`)}
-            >
-              Modifier
-            </BaseButton>
+                <BaseTag status={isActive ? Status.ACTIVE : Status.INACTIVE} />
+              </Flex>
+              <BaseText fontSize="sm" color="gray.500">
+                {t(`SUBSCRIPTION.PLAN_CATEGORY.${planInfo?.planCategory}`)}
+              </BaseText>
+            </Box>
           </Flex>
           <BaseTabs
             variant={'line'}
@@ -65,7 +54,7 @@ export const PlansDetails = ({ id }: { id: string }) => {
               },
             ]}
           />
-        </>
+        </React.Fragment>
       )}
     </BaseContainer>
   );

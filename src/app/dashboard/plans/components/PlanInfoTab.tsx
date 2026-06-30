@@ -8,13 +8,15 @@ import {
   BaseText,
   ColumnsDataTable,
 } from '@/components/custom';
-import { Box, Flex, Icon, HStack } from '@chakra-ui/react';
-import { t } from 'i18next';
+import { Flex, Icon, HStack } from '@chakra-ui/react';
 import { LuBuilding, LuUser, LuFileText, LuHeadphones, LuMegaphone, LuUsers } from 'react-icons/lu';
 import { ENUM, MODELS } from '@/types';
 import { IconType } from 'react-icons';
+import { DetailsContainer } from '@/app/components/DetailsContainer';
+import { useTranslation } from 'react-i18next';
 
 export const PlanInfoTab = ({ planInfo }: { planInfo: MODELS.IPlan | undefined }) => {
+  const { t } = useTranslation();
   const commercialFeatures = planInfo?.planFeatures?.filter((pf) => pf.feature.isCommercial) ?? [];
 
   const CATEGORY_ICONS: Record<string, IconType> = {
@@ -86,14 +88,7 @@ export const PlanInfoTab = ({ planInfo }: { planInfo: MODELS.IPlan | undefined }
   ];
 
   return (
-    <Box
-      _dark={{ bg: 'gray.800' }}
-      border="0.5px solid"
-      borderColor="inherit"
-      borderRadius="xl"
-      px={6}
-      py={4}
-    >
+    <DetailsContainer>
       <Flex align="center" gap={2} mb={4}>
         <Icon as={LuBuilding} boxSize={4} color="gray.400" />
         <BaseText
@@ -143,6 +138,6 @@ export const PlanInfoTab = ({ planInfo }: { planInfo: MODELS.IPlan | undefined }
       </DisplayInfoRow>
 
       <DataTableContainer data={commercialFeatures ?? []} columns={featureColumns} hidePagination />
-    </Box>
+    </DetailsContainer>
   );
 };

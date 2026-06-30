@@ -1,4 +1,4 @@
-import { BillingCycle, FeatureCategory, PlanCategory, PlanType, COMMON } from '@/types/enum';
+import { BillingCycle, PlanCategory, PlanType, COMMON } from '@/types/enum';
 import { IAgencySubscription } from './agency';
 
 type ISubscriptionPlan = Pick<
@@ -20,7 +20,7 @@ type ISubscriptionPlan = Pick<
   | 'updatedAt'
 >;
 
-export interface ISubscription extends ISubscriptionPlan {
+interface ISubscription extends ISubscriptionPlan {
   agency: {
     id: string;
     name: string;
@@ -43,7 +43,7 @@ export interface ISubscription extends ISubscriptionPlan {
   };
 }
 
-export interface IPlan {
+interface IPlan {
   id: string;
   name: PlanType;
   planCategory: PlanCategory;
@@ -65,7 +65,7 @@ export interface IPlan {
   updatedAt?: string;
 }
 
-export interface IPlanFeature {
+interface IPlanFeature {
   id: string;
   planId: string;
   featureId: string;
@@ -80,7 +80,7 @@ export interface IPlanFeature {
   };
 }
 
-export interface IPlanPricing {
+interface IPlanPricing {
   id: string;
   createdAt: Date;
   planId: string;
@@ -90,7 +90,7 @@ export interface IPlanPricing {
   discountPercentage: number | null;
 }
 
-export interface ICreatePlan {
+interface ICreatePlan {
   name?: string;
   isActive?: boolean;
   pricing?: {
@@ -105,22 +105,8 @@ export interface ICreatePlan {
   }[];
 }
 
-export interface IUpdatePlan extends ICreatePlan {
-  id: string;
+interface IUpdatePlan extends ICreatePlan {
+  id?: string;
 }
 
-export interface IPlanDetailsResponse extends IPlan {}
-
-export interface IPlanListResponse {
-  id: string;
-  name: string;
-  commissionRate: number | string;
-  isActive: boolean;
-  planFeatures: IPlanFeature[];
-  pricings: IPlanPricing[];
-  _count?: {
-    subscriptions: number;
-  };
-  createdAt?: string;
-  updatedAt?: string;
-}
+export type { IUpdatePlan, ICreatePlan, IPlanPricing, IPlanFeature, IPlan, ISubscription };
