@@ -28,6 +28,11 @@ export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
         path: BO_ROUTES.PLANS.LIST,
         icon: Icons.Paper,
       },
+      {
+        label: 'Transactions',
+        path: BO_ROUTES.PAYMENT_ADMIN.LIST,
+        icon: Icons.Wallet,
+      },
     ],
   },
 ];

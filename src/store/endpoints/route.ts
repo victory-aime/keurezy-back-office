@@ -5,6 +5,7 @@ const APIS_ROUTES_MODULES_PATH = {
   PACKS: '/admin/packs',
   AGENCY: '/admin/agencies',
   PLANS: '/admin/plans',
+  PAYMENT_ADMIN: '/admin/payments-admin',
 };
 
 export const APIS = (baseUrl?: string) => {
@@ -116,6 +117,33 @@ export const APIS = (baseUrl?: string) => {
         path: `${APIS_ROUTES_MODULES_PATH.AGENCY}/update-status`,
         method: 'PATCH',
         pathBase: 'SECURED_API',
+      }),
+    },
+
+    PAYMENT_ADMIN: {
+      LIST: api({
+        path: `/admin/payments`,
+        method: 'GET',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      STATS: api({
+        path: `/admin/payments/stats`,
+        method: 'GET',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      DETAIL: api({
+        path: `/admin/payments/detail`,
+        method: 'GET',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      REFUND: api({
+        path: `/admin/payments/refund`,
+        method: 'PATCH',
+        pathBase: 'SECURED_API',
+        showResponse: false,
       }),
     },
   };
