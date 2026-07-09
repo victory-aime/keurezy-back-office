@@ -2,9 +2,9 @@ export enum ROUTES {
   USERS = 'users',
   PACKS = 'packs',
   PLANS = 'plans',
+  PAYMENT_ADMIN = 'payment-admin',
   DASHBOARD = '/dashboard',
   AGENCIES = 'agencies',
-  PAYMENT_ADMIN = 'payment-admin',
 }
 
 const BASE = {
@@ -25,18 +25,22 @@ export const APP_ROUTES = {
 
 export const BO_ROUTES = {
   DASHBOARD: ROUTES.DASHBOARD,
+
   AGENCIES: {
     LIST: `${ROUTES.DASHBOARD}/${ROUTES.AGENCIES}`,
     DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.AGENCIES}/details`,
   },
+
   USERS: {
     LIST: `${ROUTES.DASHBOARD}/${ROUTES.USERS}`,
     DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.USERS}/details`,
   },
+
   PACKS: {
     LIST: `${ROUTES.DASHBOARD}/${ROUTES.PACKS}`,
     DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.PACKS}/details`,
   },
+
   PLANS: {
     LIST: `${ROUTES.DASHBOARD}/${ROUTES.PLANS}`,
     DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.PLANS}/details`,
@@ -45,6 +49,7 @@ export const BO_ROUTES = {
     TOGGLE_STATUS: `${ROUTES.DASHBOARD}/${ROUTES.PLANS}/toggle-status`,
     DELETE: `${ROUTES.DASHBOARD}/${ROUTES.PLANS}/delete`,
   },
+
   PAYMENT_ADMIN: {
     LIST: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENT_ADMIN}`,
     DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENT_ADMIN}/details`,
