@@ -5,7 +5,7 @@ import { BaseIcon } from '../base-icon';
 import { BaseFormatNumber } from '../format-number';
 import { boxStyle } from '../container/style';
 import { ENUM } from '_types/index';
-import { BaseText, CustomSkeletonLoader } from '_components/custom';
+import { BaseText, CustomSkeletonLoader, TextVariant, TextWeight } from '_components/custom';
 
 export const BaseStats: FC<BaseStatsProps> = ({
   color = 'primary',
@@ -13,6 +13,9 @@ export const BaseStats: FC<BaseStatsProps> = ({
   icon,
   message,
   title,
+  titleVariant = TextVariant.M,
+  titleWeight = TextWeight.Medium,
+  valueFontSize = '2xl',
   value = 0,
   percent = 0.25,
   isNumber = false,
@@ -44,13 +47,17 @@ export const BaseStats: FC<BaseStatsProps> = ({
       <VStack alignItems={'flex-start'} gap={5}>
         <Flex alignItems={'center'} gap={5}>
           {icon && <BaseIcon bgColor={iconBgColor}>{icon}</BaseIcon>}
-          {title && <BaseText>{title}</BaseText>}
+          {title && (
+            <BaseText variant={titleVariant} weight={titleWeight}>
+              {title}
+            </BaseText>
+          )}
         </Flex>
         {message && <BaseText>{message}</BaseText>}
       </VStack>
 
       <HStack width="full" alignItems="flex-start" justifyContent="space-between">
-        <Stat.ValueText alignItems="center" gap={2} fontSize={'xl'}>
+        <Stat.ValueText alignItems="center" gap={2} fontSize={valueFontSize}>
           {value && isNumber ? <BaseFormatNumber value={value} currencyCode={currency} /> : value}
         </Stat.ValueText>
         {isPercent && (

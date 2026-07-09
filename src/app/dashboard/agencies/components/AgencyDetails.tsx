@@ -60,7 +60,7 @@ export const AgencyDetails = ({ id }: { id: string }) => {
                   <BaseTag status={agencyInfo?.status} />
                   <BaseTag
                     color={agencyInfo?.isVerified ? 'green' : 'red'}
-                    label={agencyInfo?.isVerified ? 'Verifiée' : 'En attente de validation'}
+                    label={agencyInfo?.isVerified ? 'Vérifiée' : 'En attente de validation'}
                   />
                 </Flex>
                 <BaseText fontSize="sm" color="gray.500">

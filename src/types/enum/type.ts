@@ -7,6 +7,11 @@ export enum PlanType {
   PREMIUM_SUB = 'PREMIUM_SUB',
 }
 
+export enum BillingCycleType {
+  MONTHLY = 'MONTHLY',
+  YEARLY = 'YEARLY',
+}
+
 export type PlanCategory = 'COMMISSION_BASED' | 'SUBSCRIPTION_BASED';
 export type PricingType = 'COMMISSION' | 'SUBSCRIPTION';
 export type BillingCycle = 'MONTHLY' | 'YEARLY';

@@ -4,6 +4,7 @@ export enum ROUTES {
   PLANS = 'plans',
   DASHBOARD = '/dashboard',
   AGENCIES = 'agencies',
+  PAYMENT_ADMIN = 'payment-admin',
 }
 
 const BASE = {
@@ -12,6 +13,7 @@ const BASE = {
   USERS: 'users',
   AGENCIES: 'agencies',
   PACKS: 'packs',
+  PAYMENT_ADMIN: 'payment-admin',
 } as const;
 
 export const APP_ROUTES = {
@@ -43,6 +45,10 @@ export const BO_ROUTES = {
     TOGGLE_STATUS: `${ROUTES.DASHBOARD}/${ROUTES.PLANS}/toggle-status`,
     DELETE: `${ROUTES.DASHBOARD}/${ROUTES.PLANS}/delete`,
   },
+  PAYMENT_ADMIN: {
+    LIST: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENT_ADMIN}`,
+    DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENT_ADMIN}/details`,
+  },
 };
 
 export const ROUTE_PARENTS: Record<string, string> = {
@@ -50,4 +56,5 @@ export const ROUTE_PARENTS: Record<string, string> = {
   [BO_ROUTES.AGENCIES.DETAILS]: BO_ROUTES.AGENCIES.LIST,
   [BO_ROUTES.PACKS.DETAILS]: BO_ROUTES.PACKS.LIST,
   [BO_ROUTES.PLANS.DETAILS]: BO_ROUTES.PLANS.LIST,
+  [BO_ROUTES.PAYMENT_ADMIN.DETAILS]: BO_ROUTES.PAYMENT_ADMIN.LIST,
 };

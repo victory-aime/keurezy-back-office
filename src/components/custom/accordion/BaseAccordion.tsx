@@ -11,7 +11,7 @@ import React, { FC, useState } from 'react';
 import { BaseTag, BaseText, CustomSkeletonLoader } from '_components/custom';
 import { NoDataAnimation } from '_components/custom/data-table/NoDataAnimation';
 import { BaseAccordionProps } from './interface/accordion';
-import { useThemeColors } from '_theme/useThemeColors';
+import { hexToRGB } from '_theme/colors';
 
 export const BaseAccordion: FC<BaseAccordionProps> = ({
   items,
@@ -21,7 +21,6 @@ export const BaseAccordion: FC<BaseAccordionProps> = ({
   itemContentProps,
   ...rest
 }) => {
-  const { hexToRGB } = useThemeColors();
   const [openValues, setOpenValues] = useState<string[]>(items[0] ? [items[0].label] : []);
 
   return (
@@ -45,8 +44,8 @@ export const BaseAccordion: FC<BaseAccordionProps> = ({
             return (
               <AccordionItem key={index} value={item.label} mt="3">
                 <AccordionItemTrigger
-                  bgColor={isOpen ? hexToRGB(500, 0.3) : 'none'}
-                  borderColor={isOpen ? hexToRGB(500, 0.3) : 'none'}
+                  bgColor={isOpen ? hexToRGB('primary', 0.3) : 'none'}
+                  borderColor={isOpen ? hexToRGB('primary', 0.3) : 'none'}
                   borderWidth={1.5}
                   p="3"
                   borderRadius="7px"

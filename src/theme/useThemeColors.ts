@@ -1,5 +1,3 @@
-// theme/useThemeColors.ts
-
 import { useToken } from '@chakra-ui/react';
 
 const isValidHex = (hex: string) => /^#[0-9A-F]{6}$/i.test(hex);
