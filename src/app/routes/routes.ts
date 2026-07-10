@@ -2,19 +2,10 @@ export enum ROUTES {
   USERS = 'users',
   PACKS = 'packs',
   PLANS = 'plans',
-  PAYMENT_ADMIN = 'payment-admin',
+  PAYMENTS = 'payments',
   DASHBOARD = '/dashboard',
   AGENCIES = 'agencies',
 }
-
-const BASE = {
-  DASHBOARD: '/dashboard',
-  PLANS: 'plans',
-  USERS: 'users',
-  AGENCIES: 'agencies',
-  PACKS: 'packs',
-  PAYMENT_ADMIN: 'payment-admin',
-} as const;
 
 export const APP_ROUTES = {
   ROOT: '/',
@@ -50,9 +41,9 @@ export const BO_ROUTES = {
     DELETE: `${ROUTES.DASHBOARD}/${ROUTES.PLANS}/delete`,
   },
 
-  PAYMENT_ADMIN: {
-    LIST: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENT_ADMIN}`,
-    DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENT_ADMIN}/details`,
+  PAYMENTS: {
+    LIST: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENTS}`,
+    DETAILS: `${ROUTES.DASHBOARD}/${ROUTES.PAYMENTS}/details`,
   },
 };
 
@@ -61,5 +52,5 @@ export const ROUTE_PARENTS: Record<string, string> = {
   [BO_ROUTES.AGENCIES.DETAILS]: BO_ROUTES.AGENCIES.LIST,
   [BO_ROUTES.PACKS.DETAILS]: BO_ROUTES.PACKS.LIST,
   [BO_ROUTES.PLANS.DETAILS]: BO_ROUTES.PLANS.LIST,
-  [BO_ROUTES.PAYMENT_ADMIN.DETAILS]: BO_ROUTES.PAYMENT_ADMIN.LIST,
+  [BO_ROUTES.PAYMENTS.DETAILS]: BO_ROUTES.PAYMENTS.LIST,
 };

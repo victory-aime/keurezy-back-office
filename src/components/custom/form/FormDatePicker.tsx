@@ -48,7 +48,7 @@ export const FormDatePicker = memo(
         }
 
         if (mode === 'range' || mode === 'multiple') {
-          setValue(date?.valueAsString);
+          setValue(date?.value);
         }
       },
       [mode, setValue],
@@ -84,15 +84,6 @@ export const FormDatePicker = memo(
                 : isDisabledWeekDates
                   ? disabledWeekends
                   : undefined
-            }
-            value={
-              field.value
-                ? [
-                    typeof field.value === 'string'
-                      ? parseDate(field.value.split('T')[0])
-                      : field.value,
-                  ]
-                : undefined
             }
             outsideDaySelectable
             onOpenChange={(e) => setTouched(!e.open)}

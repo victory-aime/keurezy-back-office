@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { BaseButton, BaseModal } from '_components/custom';
-import { PaymentAdminModule } from '_store/state-management';
+import { PaymentModule } from '_store/state-management';
 
 interface RefundButtonProps {
   transactionId: string;
@@ -10,7 +10,7 @@ interface RefundButtonProps {
 
 export const RefundButton = ({ transactionId, status }: RefundButtonProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { mutate: refund, isPending } = PaymentAdminModule.refundTransactionMutation();
+  const { mutate: refund, isPending } = PaymentModule.refundTransactionMutation();
 
   if (status !== 'PAID') return null;
 

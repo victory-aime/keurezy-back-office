@@ -30,7 +30,7 @@ export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
       },
       {
         label: 'Transactions',
-        path: BO_ROUTES.PAYMENT_ADMIN.LIST,
+        path: BO_ROUTES.PAYMENTS.LIST,
         icon: Icons.Wallet,
       },
     ],

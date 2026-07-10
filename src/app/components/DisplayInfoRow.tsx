@@ -19,6 +19,7 @@ export const DisplayInfoRow = ({
     _last={{ borderBottom: 'none' }}
     justifyContent={'space-between'}
     alignItems={'center'}
+    width={'full'}
   >
     <Flex align="center" gap={2} color="gray.500">
       <Icon as={icon} boxSize={4} />

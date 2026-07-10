@@ -3,14 +3,29 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
-export const phoneSchema = (msg?: string) =>
-  Yup.string()
-    .required(msg ?? 'Numero de téléphone obligatoire')
-    .test('is-valid-phone', msg ?? 'Numero de telephone invalide', (value) => {
-      if (!value) return false;
-      try {
-        return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(value));
-      } catch {
-        return false;
-      }
-    });
+interface PhoneSchemaOptions {
+  required?: boolean;
+  requiredMessage?: string;
+  invalidMessage?: string;
+}
+
+export const phoneSchema = ({
+  required = true,
+  requiredMessage = 'Numero de téléphone obligatoire',
+  invalidMessage = 'Numero de telephone invalide',
+}: PhoneSchemaOptions = {}) => {
+  let schema = Yup.string().test('is-valid-phone', invalidMessage, (value) => {
+    if (!value) {
+      return !required;
+    }
+    try {
+      return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(value));
+    } catch {
+      return false;
+    }
+  });
+  if (required) {
+    schema = schema.required(requiredMessage);
+  }
+  return schema;
+};

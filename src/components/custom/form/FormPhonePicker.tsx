@@ -82,9 +82,11 @@ export const FormPhonePicker = ({
         disabled={isReadOnly || isLoading}
         value={field.value !== undefined && field.value !== null ? field.value : ''}
         placeholder={t(placeholder)}
-        onChange={(phone) => {
-          helpers.setValue(phone);
-          onChangeFunction?.(phone);
+        onChange={(phone, { inputValue }) => {
+          const value = inputValue ? phone : '';
+
+          helpers.setValue(value);
+          onChangeFunction?.(value);
         }}
         style={{ width: '100%' }}
         countrySelectorStyleProps={{
