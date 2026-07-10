@@ -30,7 +30,10 @@ export enum Status {
   BANNED = 'BANNED',
   PAID = 'PAID',
   REFUND = 'REFUND',
+<<<<<<< refs/remotes/origin/refactor/payments
   PAID_AND_BLOCKED = 'PAID_AND_BLOCKED',
   COMPLETED = 'COMPLETED',
   FAILED = 'FAILED',
+=======
+>>>>>>> * refactor(payments): update design and improve types
 }

@@ -1,8 +1,14 @@
 import { ENUM } from '..';
 
+<<<<<<< refs/remotes/origin/refactor/payments
 export type PaymentMethod = ['wave', 'orange_money'];
 
 interface IGetTransactionsParams {
+=======
+type PaymentMethod = ['wave', 'orange_money'];
+
+export interface IGetTransactionsParams {
+>>>>>>> * refactor(payments): update design and improve types
   page?: number;
   limit?: number;
   status?: ENUM.COMMON.Status;
@@ -10,6 +16,7 @@ interface IGetTransactionsParams {
   min_amount?: number;
   max_amount?: number;
   start_date?: string;
+<<<<<<< refs/remotes/origin/refactor/payments
   end_date?: string;
   date?: string;
   customer_phone?: string;
@@ -29,6 +36,25 @@ interface IGetPayoutParams {
 }
 
 interface IPaymentTransactionsResponse {
+=======
+  customer_phone?: string;
+}
+
+export interface IPaymentPlan {
+  id: string;
+  name: string;
+  pricingType: string;
+  pricings?: { billingCycle: string; price: number; currency?: string }[];
+}
+
+export interface IPaymentUser {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface IPaymentTransactionsResponse {
+>>>>>>> * refactor(payments): update design and improve types
   order_id: string;
   amount: number;
   fees: number;
@@ -56,7 +82,11 @@ interface IPaymentTransactionsResponse {
   paid_at: string;
 }
 
+<<<<<<< refs/remotes/origin/refactor/payments
 interface ITransactionsResponse {
+=======
+export interface ITransactionsResponse {
+>>>>>>> * refactor(payments): update design and improve types
   transactions: IPaymentTransactionsResponse[];
   pagination: {
     page: number;
@@ -66,7 +96,11 @@ interface ITransactionsResponse {
   };
 }
 
+<<<<<<< refs/remotes/origin/refactor/payments
 interface IPaymentStatsResponse {
+=======
+export interface IPaymentStatsResponse {
+>>>>>>> * refactor(payments): update design and improve types
   transactions: {
     total: number;
     paid: number;
@@ -80,6 +114,7 @@ interface IPaymentStatsResponse {
   };
 }
 
+<<<<<<< refs/remotes/origin/refactor/payments
 interface IPaymentPayoutResponseList {
   payouts: {
     _id: string;
@@ -145,3 +180,8 @@ export type {
   IPaymentPayoutPayload,
   IPaymentPayoutByIdResponse,
 };
+=======
+export interface IRefundResponse {
+  message: string;
+}
+>>>>>>> * refactor(payments): update design and improve types
