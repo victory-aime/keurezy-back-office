@@ -5,7 +5,7 @@ const APIS_ROUTES_MODULES_PATH = {
   PACKS: '/admin/packs',
   AGENCY: '/admin/agencies',
   PLANS: '/admin/plans',
-  PAYMENT_ADMIN: '/admin/payments-admin',
+  PAYMENT: '/admin/payments',
 };
 
 export const APIS = (baseUrl?: string) => {
@@ -120,28 +120,33 @@ export const APIS = (baseUrl?: string) => {
       }),
     },
 
-    PAYMENT_ADMIN: {
+    PAYMENT: {
       LIST: api({
-        path: `/admin/payments`,
-        method: 'GET',
-        pathBase: 'SECURED_API',
-        showResponse: false,
-      }),
-      STATS: api({
-        path: `/admin/payments/stats`,
+        path: `${APIS_ROUTES_MODULES_PATH.PAYMENT}`,
         method: 'GET',
         pathBase: 'SECURED_API',
         showResponse: false,
       }),
       DETAIL: api({
-        path: `/admin/payments/detail`,
+        path: `${APIS_ROUTES_MODULES_PATH.PAYMENT}/detail`,
         method: 'GET',
         pathBase: 'SECURED_API',
         showResponse: false,
       }),
       REFUND: api({
-        path: `/admin/payments/refund`,
-        method: 'PATCH',
+        path: `${APIS_ROUTES_MODULES_PATH.PAYMENT}/refund`,
+        method: 'POST',
+        pathBase: 'SECURED_API',
+      }),
+      ALL_REFUNDS: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PAYMENT}/refund-all`,
+        method: 'GET',
+        pathBase: 'SECURED_API',
+        showResponse: false,
+      }),
+      REFUND_BY_ID: api({
+        path: `${APIS_ROUTES_MODULES_PATH.PAYMENT}/refund-id`,
+        method: 'GET',
         pathBase: 'SECURED_API',
         showResponse: false,
       }),

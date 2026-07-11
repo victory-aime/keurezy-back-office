@@ -1,11 +1,11 @@
 import { applicationInstance } from 'rise-core-frontend';
-import { PaymentAdminService } from '_store/services';
+import { PaymentService } from '_store/services';
 
-export const paymentAdminServiceInstance = () => {
+export const paymentServiceInstance = () => {
   const context = applicationInstance.getContext();
   if (!context) {
     throw new Error('[PaymentAdminService] No context found.');
   }
 
-  return new PaymentAdminService(context);
+  return new PaymentService(context);
 };

@@ -4,6 +4,8 @@ import { headers } from 'next/headers';
 import { SessionRefreshProvider } from '_context/SessionRefresh-context';
 import { UserProvider } from '_context/user-context';
 import { Layout } from '@/app/Layout/Layout';
+import React from 'react';
+import 'react-international-phone/style.css';
 
 export default async function DashboardLayout({
   children,

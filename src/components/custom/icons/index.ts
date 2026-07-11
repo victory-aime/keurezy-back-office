@@ -20,7 +20,7 @@ import {
 } from 'react-icons/ci';
 import { FaBook, FaUsers } from 'react-icons/fa6';
 import { FaCog, FaUserAlt, FaUserPlus } from 'react-icons/fa';
-import { HiOutlineMail } from 'react-icons/hi';
+import { HiOutlineInformationCircle, HiOutlineMail } from 'react-icons/hi';
 import {
   HiHeart,
   HiHome,
@@ -62,7 +62,7 @@ import {
 } from 'react-icons/tb';
 import { FaTrashAlt } from 'react-icons/fa';
 import { IoCopyOutline, IoDownloadOutline, IoKeyOutline, IoShareOutline } from 'react-icons/io5';
-import { MdAssignmentInd, MdEdit, MdLocalPhone, MdWallet } from 'react-icons/md';
+import { MdAssignmentInd, MdEdit, MdLocalPhone, MdOutlinePayments, MdWallet } from 'react-icons/md';
 import { PiBathtubLight, PiEyeLight } from 'react-icons/pi';
 import { GrMoney } from 'react-icons/gr';
 import { TbRestore } from 'react-icons/tb';
@@ -87,6 +87,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoTicket } from 'react-icons/io5';
 import { MdOutlineQueryStats } from 'react-icons/md';
 import { IoStatsChartSharp } from 'react-icons/io5';
+import { GiCash } from 'react-icons/gi';
 
 export const Icons = {
   MapPin: CiMapPin,
@@ -184,4 +185,7 @@ export const Icons = {
   LuFiles,
   LuFileImage,
   LuFile,
+  Cash: MdOutlinePayments,
+  CashV2: GiCash,
+  Info: HiOutlineInformationCircle,
 };

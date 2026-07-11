@@ -132,7 +132,11 @@
       "DONE": "Terminée",
       "CONFIRMED": "Confirmée",
       "MAINTENANCE": "Maintenance",
-      "OPEN": "Ouverte"
+      "OPEN": "Ouverte",
+      "PAID": "Payé",
+      "REFUND": "Remboursé",
+      "COMPLETED": "Terminé",
+      "FAILED": "Echoué"
     },
     "TODAY": "Aujourd'hui",
     "MONTH": "Mois",

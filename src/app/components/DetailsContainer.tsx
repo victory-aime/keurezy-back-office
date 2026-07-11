@@ -1,7 +1,7 @@
-import { Box } from '@chakra-ui/react';
-import React from 'react';
+import { Box, BoxProps } from '@chakra-ui/react';
+import React, { FC } from 'react';
 
-export function DetailsContainer({ children }: { children: React.ReactNode }) {
+export const DetailsContainer: FC<BoxProps> = ({ children, ...rest }) => {
   return (
     <Box
       _dark={{ bg: 'gray.800' }}
@@ -10,8 +10,9 @@ export function DetailsContainer({ children }: { children: React.ReactNode }) {
       borderRadius="xl"
       px={6}
       py={4}
+      {...rest}
     >
       {children}
     </Box>
   );
-}
+};

@@ -70,6 +70,7 @@ export const DatePickerInputByMode = memo(
                     placeholder="Date de début"
                     isError={isError}
                     width={'full'}
+                    index={0}
                   />
                 </DatePicker.Trigger>
                 <DatePicker.Trigger unstyled width={'full'}>
@@ -77,6 +78,7 @@ export const DatePickerInputByMode = memo(
                     placeholder="Date de fin"
                     isError={isError}
                     width={'full'}
+                    index={1}
                   />
                 </DatePicker.Trigger>
               </Flex>
