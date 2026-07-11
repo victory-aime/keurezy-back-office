@@ -20,7 +20,7 @@ import {
 } from 'react-icons/ci';
 import { FaBook, FaUsers } from 'react-icons/fa6';
 import { FaCog, FaUserAlt, FaUserPlus } from 'react-icons/fa';
-import { HiOutlineMail } from 'react-icons/hi';
+import { HiOutlineInformationCircle, HiOutlineMail } from 'react-icons/hi';
 import {
   HiHeart,
   HiHome,
@@ -87,6 +87,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoTicket } from 'react-icons/io5';
 import { MdOutlineQueryStats } from 'react-icons/md';
 import { IoStatsChartSharp } from 'react-icons/io5';
+import { GiCash } from 'react-icons/gi';
 
 export const Icons = {
   MapPin: CiMapPin,
@@ -185,4 +186,6 @@ export const Icons = {
   LuFileImage,
   LuFile,
   Cash: MdOutlinePayments,
+  CashV2: GiCash,
+  Info: HiOutlineInformationCircle,
 };

@@ -14,20 +14,20 @@ import {
 import { MODELS, VALIDATION } from '_types/';
 import * as Yup from 'yup';
 
-interface IPaymentFilters extends ModalOpenProps {
+interface IPayoutFilters extends ModalOpenProps {
   data: MODELS.IGetTransactionsParams | null;
 }
 
-export const PaymentFilter = ({
+export const PayoutFilters = ({
   onChange,
   isLoading,
   callback = () => {},
   data,
-}: IPaymentFilters) => {
+}: IPayoutFilters) => {
   const paymentMethodList = createListCollection({
     items: [
       { label: 'Wave', value: 'wave' },
-      { label: 'Orange', value: 'orange' },
+      { label: 'Orange', value: 'orange_money' },
     ].map((method) => ({
       label: method.label,
       value: method.value,
@@ -40,16 +40,12 @@ export const PaymentFilter = ({
         value: 'pending',
       },
       {
-        label: 'Payé',
-        value: 'paid',
+        label: 'Terminé',
+        value: 'completed',
       },
       {
-        label: 'Payé et bloqué',
-        value: 'paid_and_blocked',
-      },
-      {
-        label: 'Remboursé',
-        value: 'refunded',
+        label: 'Echoué',
+        value: 'failed',
       },
       {
         label: 'Annulé',
@@ -64,12 +60,12 @@ export const PaymentFilter = ({
   return (
     <Formik
       enableReinitialize
-      initialValues={{} as MODELS.IGetTransactionsParams}
+      initialValues={{} as MODELS.IGetPayoutParams}
       onSubmit={callback}
       onReset={onChange}
       validationSchema={() =>
         Yup.object().shape({
-          customer_phone: VALIDATION.PHONE_VALIDATION.phoneSchema({ required: false }),
+          recipient_phone: VALIDATION.PHONE_VALIDATION.phoneSchema({ required: false }),
         })
       }
     >
@@ -81,7 +77,7 @@ export const PaymentFilter = ({
           </HStack>
           <HStack width={'full'}>
             <FormPhonePicker
-              name={'customer_phone'}
+              name={'recipient_phone'}
               placeholder={'Numéro de téléphone client'}
               listAvailableCountries={['sn']}
             />
@@ -96,7 +92,7 @@ export const PaymentFilter = ({
             <FormDatePicker name={'date'} mode={'range'} />
           </HStack>
           <FormSelect
-            name={'paymentMethod'}
+            name={'payment_method'}
             placeholder={'Methode de paiement'}
             listItems={paymentMethodList}
             setFieldValue={setFieldValue}

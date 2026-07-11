@@ -134,7 +134,9 @@
       "MAINTENANCE": "Maintenance",
       "OPEN": "Ouverte",
       "PAID": "Payé",
-      "REFUND": "Remboursé"
+      "REFUND": "Remboursé",
+      "COMPLETED": "Terminé",
+      "FAILED": "Echoué"
     },
     "TODAY": "Aujourd'hui",
     "MONTH": "Mois",

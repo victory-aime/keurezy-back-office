@@ -1,7 +1,5 @@
-import { PaymentAdminCache } from './cache';
 import * as Constants from './constants';
 import { paymentServiceInstance } from './payment.service-instance';
-import type { AxiosError } from 'axios';
 import { QUERIES } from 'rise-core-frontend';
 import { MODELS } from '_types/';
 
@@ -19,77 +17,53 @@ const getAllTransactionsQueries = (
     undefined,
     MODELS.ITransactionsResponse
   >({
-    queryKey: [Constants.PAYMENT_ADMIN_KEYS.GET_ALL_TRANSACTIONS, params],
+    queryKey: [Constants.PAYMENTS_KEYS.GET_ALL_TRANSACTIONS, params],
     queryFn: () => paymentServiceInstance().get_all_transactions(params),
     options: queryOptions,
   });
 };
 
 const getTransactionByIdQueries = (
-  args: QUERIES.QueryPayload<
-    MODELS.IPaymentTransactionsResponse,
-    undefined,
-    { transactionId: string }
-  >,
+  args: QUERIES.QueryPayload<MODELS.ITransactions, undefined, { transactionId: string }>,
 ) => {
   const { queryOptions, params } = args;
 
-  return QUERIES.useCustomQuery<
-    { transactionId: string },
-    undefined,
-    MODELS.IPaymentTransactionsResponse
-  >({
-    queryKey: [Constants.PAYMENT_ADMIN_KEYS.GET_TRANSACTION_BY_ID, params],
+  return QUERIES.useCustomQuery<{ transactionId: string }, undefined, MODELS.ITransactions>({
+    queryKey: [Constants.PAYMENTS_KEYS.GET_TRANSACTION_BY_ID, params],
     queryFn: () => paymentServiceInstance().get_transaction_by_id(params?.transactionId!),
     options: queryOptions,
   });
 };
 
-const refundTransactionMutation = (
-  args: QUERIES.MutationPayload<{ data: MODELS.IPaymentPayoutPayload }, undefined, { id: string }>,
+const refundMutation = (
+  args: QUERIES.MutationPayload<MODELS.IPayoutPayload, undefined, { id: string }>,
 ) => {
-  return QUERIES.useCustomMutation<
-    { data: MODELS.IPaymentPayoutPayload },
-    undefined,
-    { id: string }
-  >({
+  return QUERIES.useCustomMutation<MODELS.IPayoutPayload, undefined, { id: string }>({
     mutationFn: ({ payload, params }) =>
-      paymentServiceInstance().refund_transaction(params?.id!, payload?.data!),
+      paymentServiceInstance().refund_transaction(params?.id!, payload!),
     options: args.mutationOptions,
   });
 };
 
 const getAllRefundsQueries = (
-  args: QUERIES.QueryPayload<MODELS.IPaymentPayoutResponseList, undefined, MODELS.IGetPayoutParams>,
+  args: QUERIES.QueryPayload<MODELS.IPayoutResponse, undefined, MODELS.IGetPayoutParams>,
 ) => {
   const { queryOptions, params } = args;
 
-  return QUERIES.useCustomQuery<
-    MODELS.IGetPayoutParams,
-    undefined,
-    MODELS.IPaymentPayoutResponseList
-  >({
-    queryKey: [Constants.PAYMENT_ADMIN_KEYS.GET_ALL_REFUNDS, params],
+  return QUERIES.useCustomQuery<MODELS.IGetPayoutParams, undefined, MODELS.IPayoutResponse>({
+    queryKey: [Constants.PAYMENTS_KEYS.GET_ALL_REFUNDS, params],
     queryFn: () => paymentServiceInstance().all_refunds(params),
     options: queryOptions,
   });
 };
 
 const getRefundByIdQueries = (
-  args: QUERIES.QueryPayload<
-    MODELS.IPaymentPayoutByIdResponse,
-    undefined,
-    { transactionId: string }
-  >,
+  args: QUERIES.QueryPayload<MODELS.IPayoutByIdResponse, undefined, { transactionId: string }>,
 ) => {
   const { queryOptions, params } = args;
 
-  return QUERIES.useCustomQuery<
-    { transactionId: string },
-    undefined,
-    MODELS.IPaymentPayoutByIdResponse
-  >({
-    queryKey: [Constants.PAYMENT_ADMIN_KEYS.GET_REFUND_BY_ID, params],
+  return QUERIES.useCustomQuery<{ transactionId: string }, undefined, MODELS.IPayoutByIdResponse>({
+    queryKey: [Constants.PAYMENTS_KEYS.GET_REFUND_BY_ID, params],
     queryFn: () => paymentServiceInstance().refund_by_id(params?.transactionId!),
     options: queryOptions,
   });
@@ -98,7 +72,7 @@ const getRefundByIdQueries = (
 export {
   getAllTransactionsQueries,
   getTransactionByIdQueries,
-  refundTransactionMutation,
+  refundMutation,
   getAllRefundsQueries,
   getRefundByIdQueries,
 };

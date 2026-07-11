@@ -1,14 +1,8 @@
 import { ENUM } from '..';
 
-<<<<<<< refs/remotes/origin/refactor/payments
 export type PaymentMethod = ['wave', 'orange_money'];
 
 interface IGetTransactionsParams {
-=======
-type PaymentMethod = ['wave', 'orange_money'];
-
-export interface IGetTransactionsParams {
->>>>>>> * refactor(payments): update design and improve types
   page?: number;
   limit?: number;
   status?: ENUM.COMMON.Status;
@@ -16,7 +10,6 @@ export interface IGetTransactionsParams {
   min_amount?: number;
   max_amount?: number;
   start_date?: string;
-<<<<<<< refs/remotes/origin/refactor/payments
   end_date?: string;
   date?: string;
   customer_phone?: string;
@@ -35,26 +28,7 @@ interface IGetPayoutParams {
   recipient_phone?: string;
 }
 
-interface IPaymentTransactionsResponse {
-=======
-  customer_phone?: string;
-}
-
-export interface IPaymentPlan {
-  id: string;
-  name: string;
-  pricingType: string;
-  pricings?: { billingCycle: string; price: number; currency?: string }[];
-}
-
-export interface IPaymentUser {
-  id: string;
-  name: string;
-  email: string;
-}
-
-export interface IPaymentTransactionsResponse {
->>>>>>> * refactor(payments): update design and improve types
+interface ITransactions {
   order_id: string;
   amount: number;
   fees: number;
@@ -82,12 +56,8 @@ export interface IPaymentTransactionsResponse {
   paid_at: string;
 }
 
-<<<<<<< refs/remotes/origin/refactor/payments
 interface ITransactionsResponse {
-=======
-export interface ITransactionsResponse {
->>>>>>> * refactor(payments): update design and improve types
-  transactions: IPaymentTransactionsResponse[];
+  transactions: ITransactions[];
   pagination: {
     page: number;
     limit: number;
@@ -96,26 +66,7 @@ export interface ITransactionsResponse {
   };
 }
 
-<<<<<<< refs/remotes/origin/refactor/payments
-interface IPaymentStatsResponse {
-=======
-export interface IPaymentStatsResponse {
->>>>>>> * refactor(payments): update design and improve types
-  transactions: {
-    total: number;
-    paid: number;
-    pending: number;
-    failed: number;
-    cancelled: number;
-  };
-  revenue: {
-    total: number;
-    currency: string;
-  };
-}
-
-<<<<<<< refs/remotes/origin/refactor/payments
-interface IPaymentPayoutResponseList {
+interface IPayoutResponse {
   payouts: {
     _id: string;
     organization_id: string;
@@ -137,11 +88,11 @@ interface IPaymentPayoutResponseList {
   };
 }
 
-interface IPaymentPayoutByIdResponse {
+interface IPayoutByIdResponse {
   order_id: string;
   amount: number;
   fees: number;
-  selected_payment_method: PaymentMethod;
+  selected_payment_method: string;
   currency: string;
   payout_status: ENUM.COMMON.Status;
   recipient: {
@@ -159,8 +110,8 @@ interface IPaymentPayoutByIdResponse {
   is_deleted: boolean;
 }
 
-interface IPaymentPayoutPayload {
-  selected_payment_method: PaymentMethod;
+interface IPayoutPayload {
+  selected_payment_method: string;
   amount: number;
   recipient: {
     first_name: string;
@@ -172,16 +123,10 @@ interface IPaymentPayoutPayload {
 
 export type {
   ITransactionsResponse,
-  IPaymentTransactionsResponse,
-  IPaymentStatsResponse,
   IGetTransactionsParams,
-  IPaymentPayoutResponseList,
+  IPayoutResponse,
   IGetPayoutParams,
-  IPaymentPayoutPayload,
-  IPaymentPayoutByIdResponse,
+  IPayoutPayload,
+  IPayoutByIdResponse,
+  ITransactions,
 };
-=======
-export interface IRefundResponse {
-  message: string;
-}
->>>>>>> * refactor(payments): update design and improve types

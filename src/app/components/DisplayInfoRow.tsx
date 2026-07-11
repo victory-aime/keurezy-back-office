@@ -6,7 +6,7 @@ export const DisplayInfoRow = ({
   label,
   children,
 }: {
-  icon: React.ElementType;
+  icon?: React.ElementType;
   label: string;
   children: React.ReactNode;
 }) => (
@@ -22,7 +22,7 @@ export const DisplayInfoRow = ({
     width={'full'}
   >
     <Flex align="center" gap={2} color="gray.500">
-      <Icon as={icon} boxSize={4} />
+      {icon && <Icon as={icon} boxSize={4} />}
       <Text fontSize="sm">{label} </Text>
     </Flex>
     <Box>{children}</Box>

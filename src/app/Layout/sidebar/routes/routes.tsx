@@ -4,7 +4,7 @@ import { Icons } from '_components/custom';
 
 export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
   {
-    title: 'Gestion',
+    title: 'Principal',
     icon: Icons.GridHome,
     links: [
       {
@@ -30,8 +30,13 @@ export const BO_SIDE_ROUTES: SidebarNavGroupProps[] = [
       },
       {
         label: 'Transactions',
-        path: BO_ROUTES.PAYMENTS.LIST,
+        path: BO_ROUTES.TRANSACTIONS.LIST,
         icon: Icons.Wallet,
+      },
+      {
+        label: 'Payouts',
+        path: BO_ROUTES.PAYOUTS.LIST,
+        icon: Icons.CashV2,
       },
     ],
   },

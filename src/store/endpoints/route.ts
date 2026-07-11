@@ -5,7 +5,7 @@ const APIS_ROUTES_MODULES_PATH = {
   PACKS: '/admin/packs',
   AGENCY: '/admin/agencies',
   PLANS: '/admin/plans',
-  PAYMENT: '/admin/payment',
+  PAYMENT: '/admin/payments',
 };
 
 export const APIS = (baseUrl?: string) => {

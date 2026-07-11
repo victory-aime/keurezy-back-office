@@ -24,6 +24,9 @@ const STATUS_META: Partial<Record<ENUM.COMMON.Status, variantColorType>> = {
   CONFIRMED: 'success',
   DONE: 'success',
   PAID: 'success',
+  REFUND: 'info',
+  FAILED: 'danger',
+  COMPLETED: 'success',
 } as const satisfies Partial<Record<ENUM.COMMON.Status, variantColorType>>;
 
 const VARIANT_CONFIG: Partial<Record<variantColorType, { colorPalette: ColorPalette }>> = {
